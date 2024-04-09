@@ -1,0 +1,146 @@
+/* Defina o estilo global do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+/* Estilize o cabeçalho */
+header {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left h1 {
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Centralize o header-center */
+.header-center {
+    flex: 1;
+    text-align: center;
+    margin-left: 350px;
+}
+
+.header-center a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Estilize os ícones no cabeçalho */
+.header-right span {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* Alinhe o header-right à direita */
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Adicione esta linha para alinhar à direita */
+}
+
+.search-icon {
+    background-image: url(imagens/search.png);
+}
+
+.cart-icon {
+    background-image: url(imagens/cart.png);
+
+}
+
+.user-icon {
+    background-image: url(imagens/user.png);
+
+
+}
+
+
+/* Estilize a seção de banner */
+.banner {
+    background-image: url('imagens/fattebanner.png');
+    background-size: cover;
+    height: 900px;
+}
+
+/* Estilize a seção de galeria */
+.galeria {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.galeria a {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+}
+
+/* Adicione estilos aos botões */
+.btn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Estilize os ícones na galeria */
+.galeria a::before {
+    content: "\1F3A9"; /* Ícone de uma bolsa de compras */
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+
+footer {
+    background-color: #1b1a1a;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+
+
+}
+
+.footer-right {
+
+
+
+
+}
+
+
+a {
+
+
+
+}
+
+button {
+
+
+
+}
