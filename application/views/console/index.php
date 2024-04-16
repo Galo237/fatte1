@@ -12,10 +12,10 @@
             <div class="logo">Fatte</div>
                 <nav class="menu">
                     <ul>
-                        <li>Destaque</li>
-                        <li>Masculino</li>
-                        <li>Feminino</li>
-                        <li>Sobre</li>
+                        <a href=""><li class="btn">Destaque</li></a>
+                        <a href="pages/masculino.php"><li class="btn">Masculino</li></a>
+                        <a href="pages/feminino.php"><li class="btn">Feminino</li></a>
+                        <a href="pages/sobre.php"><li class="btn">Sobre</li></a>
                     </ul>
                 </nav>
             <div class="icons">

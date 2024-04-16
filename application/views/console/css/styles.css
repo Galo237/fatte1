@@ -89,6 +89,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 footer {
@@ -106,18 +107,5 @@ footer {
 }
 
 .footer-right {
-
-}
-
-
-a {
-
-
-
-}
-
-button {
-
-
 
 }
