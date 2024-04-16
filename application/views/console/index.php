@@ -21,7 +21,7 @@
             <div class="icons">
                 <span class="search-icon"><img src="imagens/search.png" alt=""></span>
                 <span class="cart-icon"><img src="imagens/cart.png" alt=""></span>
-                <span class="profile-icon"><img src="imagens/user.png" alt=""></span>
+                <a href="pages/cadastro.php"><span class="profile-icon"><img src="imagens/user.png" alt=""></span></a>
             </div> 
         </div> 
     </header>
@@ -39,7 +39,7 @@
     </section>
 
     <section class="featured-products">
-        
+
     </section>
 
     <footer>

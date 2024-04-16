@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=".../css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Fatte - Login</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
                 <input class="senha" type="password" name="senha" placeholder="Senha">
                 <input type="submit" name="submit" value="Entrar">
             </form>
-            <p>Ainda não possui uma conta? <a href="index.html">Cadastre-se</a></p>
+            <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p>
         </div>
     </section>
 </body>

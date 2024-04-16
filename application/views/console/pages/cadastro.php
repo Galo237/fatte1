@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=".../css/cadastro.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
     <title>Fatte - Cadastre-se</title>
 </head>
 
 <body>
     <div class="container">
         <div class="form-image">
-            <img src="assets/img/banner2.jpg" alt="">
+            <img src="../imagens/banner2.png" alt="">
         </div>
         <div class="form">
             <form action="#">
@@ -21,7 +21,7 @@
                         <h1>Cadastre-se</h1>
                     </div>
                     <div class="login-button">
-                        <button><a href="login.html">Entrar</a></button>
+                        <button><a href="login.php">Entrar</a></button>
                     </div>
                 </div>
 
