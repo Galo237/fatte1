@@ -31,10 +31,13 @@
     <section class="banner">
     </section>
 
+    <a>
+        <h3 class="fotos">GALERIA</h3>
+    </a>
     <section class="galeria">
-        <a></a>
-        <a></a>
-        <a></a>
+        <a><img src="imagens/galeria1.jpg" alt=""></a>
+        <a><img src="imagens/galeria2.jpg" alt=""></a>
+        <a><img class="galeria3" src="imagens/galeria3.jpg" alt=""></a>
     </section>
 
     <section class="featured-products">
@@ -53,9 +56,9 @@
         </div>
         <div class="footer-right">
             <h3>REDES SOCIAIS</h3>
-            <a class="instagram"></a><p>@fatteclothing</p>
-            <a class="twitter"></a><p>@fatteclothing</p>
-            <a class="facebook"></a><p>Fatte Clothing</p>
+            <a class="instagram"></a><img src="imagens/instagram.png" alt=""><p>@fatteclothing</p>
+            <a class="twitter"><img src="imagens/twitter.png" alt=""></a><p>@fatteclothing</p>
+            <a class="facebook"><img src="" alt=""></a><p>Fatte Clothing</p>
         </div>       
     </footer>
 

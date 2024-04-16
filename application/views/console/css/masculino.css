@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left h1 {
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Centralize o header-center */
+.header-center {
+    flex: 1;
+    text-align: center;
+    margin-left: 350px;
+}
+
+.header-center a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Estilize os ícones no cabeçalho */
+.header-right span {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* Alinhe o header-right à direita */
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Adicione esta linha para alinhar à direita */
+}
+
+.search-icon {
+    background-image: url('../imagens/search.png');
+}
+
+.cart-icon {
+    background-image: url('../imagens/cart.png');
+}
+
+.user-icon {
+    background-image: url('../imagens/user.png');
+}
