@@ -19,9 +19,9 @@
                     </ul>
                 </nav>
             <div class="icons">
-                <span class="search-icon"><img src="imagens/search.png" alt=""></span>
-                <span class="cart-icon"><img src="imagens/cart.png" alt=""></span>
-                <a href="pages/cadastro.php"><span class="profile-icon"><img src="imagens/user.png" alt=""></span></a>
+                <span class="search-icon"><img src="imagens/search1.png" alt=""></span>
+                <span class="cart-icon"><img src="imagens/cart1.png" alt=""></span>
+                <a href="pages/cadastro.php"><span class="profile-icon"><img src="imagens/user1.png" alt=""></span></a>
             </div> 
         </div> 
     </header>
