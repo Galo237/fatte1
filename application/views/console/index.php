@@ -8,24 +8,22 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="header-left">
-                <h1 class="button">Fatte</h1>
-            </div>
-            <div class="header-center">
-                <h2>
-                <a href="index.php" class="btn"><b>Destaques</b></a>
-                <a href="pages/masculino.php" class="btn"><b>Masculino</b></a>
-                <a href="pages/feminino.php" class="btn"><b>Feminino</b></a>
-                <a href="pages/sobre.php" class="btn"><b>Sobre</b></a>
-                </h2>
-            </div>
-            <div class="header-right">
-                <span class="search-icon"></span>
-                <span class="cart-icon"></span>
-                <span class="user-icon"></span>               
-            </div>
-        </nav>
+        <div class="header">
+            <div class="logo">Fatte</div>
+                <nav class="menu">
+                    <ul>
+                        <li>Destaque</li>
+                        <li>Masculino</li>
+                        <li>Feminino</li>
+                        <li>Sobre</li>
+                    </ul>
+                </nav>
+            <div class="icons">
+                <span class="search-icon"><img src="imagens/search.png" alt=""></span>
+                <span class="cart-icon"><img src="imagens/cart.png" alt=""></span>
+                <span class="profile-icon"><img src="imagens/user.png" alt=""></span>
+            </div> 
+        </div> 
     </header>
 
     <section class="banner">
@@ -41,7 +39,7 @@
     </section>
 
     <section class="featured-products">
-
+        
     </section>
 
     <footer>
@@ -58,7 +56,7 @@
             <h3>REDES SOCIAIS</h3>
             <a class="instagram"></a><img src="imagens/instagram.png" alt=""><p>@fatteclothing</p>
             <a class="twitter"><img src="imagens/twitter.png" alt=""></a><p>@fatteclothing</p>
-            <a class="facebook"><img src="" alt=""></a><p>Fatte Clothing</p>
+            <a class="facebook"><img src="imagens/facebook.png" alt=""></a><p>Fatte Clothing</p>
         </div>       
     </footer>
 

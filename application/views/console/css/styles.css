@@ -9,67 +9,38 @@ body {
     background-color: #f8f8f8;
 }
 
-/* Estilize o cabeçalho */
-header {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 10px;
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 30px; /* Ajuste o preenchimento conforme necessário */
+    background-color: #fff; /* Ou qualquer cor de fundo desejada */
 }
-
-.header-left {
-    max-width: 150px;
+  
+.logo {
+    font-size: 40px;
+    font-weight: bold; /* Ajuste o peso da fonte conforme necessário */
 }
-
-.header-left h1 {
-    font-size: 48px;
-    display: flex;
-    align-items: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
-
-/* Centralize o header-center */
-.header-center {
-    flex: 1;
-    text-align: center;
-    margin-left: 350px;
-}
-
-.header-center a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #000000;
+  
+.menu li {
+    display: inline-block;
+    margin-right: 30px; /* Ajuste o espaçamento entre os itens do menu */
+    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
     font-weight: bold;
 }
-
-/* Estilize os ícones no cabeçalho */
-.header-right span {
-    margin-right: 10px;
-    font-size: 18px;
-    color: #fff;
+  
+.icons span {
+    margin-left: 15px; /* Ajuste o espaçamento entre os ícones */
+    font-size: 24px; /* Ajuste o tamanho da fonte conforme necessário */
 }
+  
 
-/* Alinhe o header-right à direita */
-.header-right {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Adicione esta linha para alinhar à direita */
-}
-
-.search-icon {
-    background-image: url('../imagens/search.png');
-}
-
-.cart-icon {
-    background-image: url('../imagens/cart.png');
-
-}
-
-.user-icon {
-    background-image: url('../imagens/user.png');
-}
 
 
 /* Estilize a seção de banner */
