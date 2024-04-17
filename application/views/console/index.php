@@ -20,7 +20,7 @@
                 </nav>
             <div class="icons">
                 <span class="search-icon"><img src="imagens/search1.png" alt=""></span>
-                <span class="cart-icon"><img src="imagens/cart1.png" alt=""></span>
+                <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="imagens/cart1.png" alt=""></span></a>
                 <a href="pages/cadastro.php"><span class="profile-icon"><img src="imagens/user1.png" alt=""></span></a>
             </div> 
         </div> 

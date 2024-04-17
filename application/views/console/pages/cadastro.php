@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -33,7 +37,7 @@
 
                     <div class="input-box">
                         <label for="lastname">Telefone</label>
-                        <input id="lastname" type="text" name="lastname" placeholder="Digite seu sobrenome" required>
+                        <input id="lastname" type="text" name="telefone" placeholder="Digite seu telefone" required>
                     </div>
                     <div class="input-box">
                         <label for="email">E-mail</label>
@@ -88,7 +92,7 @@
                 </div>
 
                 <div class="continue-button">
-                    <button id="continue-button"><a href="#">Continuar</a> </button>
+                    <button id="continue-button" name="submit"><a href="#">Continuar</a> </button>
                 </div>
             </form>
         </div>
