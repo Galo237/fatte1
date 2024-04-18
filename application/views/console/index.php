@@ -42,7 +42,7 @@
 
     </section>
 
-    <h3 class="destaques">Destaques</h3>
+    <h3 class="destaques">DESTAQUES</h3>
 
     <div class="card">
     <p>
