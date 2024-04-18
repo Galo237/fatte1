@@ -42,6 +42,25 @@
 
     </section>
 
+    <h3 class="destaques">Destaques</h3>
+
+    <div class="card">
+    <p>
+      <a href=""><img src="imagens/masculino.jpg" alt="masculino"></a>
+      <span>Masculino</span>
+    </p>
+    <p>
+      <a href=""><img src="imagens/feminino.jpg" alt="feminino"></a>
+      <span>Feminino</span></p>
+    <p>
+      <a href=""><img src="imagens/acessorios.jpg" alt="acessorios"></a>
+      <span>Acessórios</span></p>
+    <p>
+      <a href=""><img src="imagens/kits.jpg" alt="kits"></a>
+      <span>Kits</span></p>
+</div>
+
+
     <footer>
         <div class="footer-left">
             <h3>CONTATO</h3>
