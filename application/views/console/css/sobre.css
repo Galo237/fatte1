@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Defina o estilo global do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px; /* Ajuste o preenchimento conforme necessário */
+    background-color: #fff; /* Ou qualquer cor de fundo desejada */
+}
+  
+.logo {
+    font-size: 40px;
+    font-weight: bold; /* Ajuste o peso da fonte conforme necessário */
+}
+  
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.menu li {
+    display: inline-block;
+    margin-right: 30px; /* Ajuste o espaçamento entre os itens do menu */
+    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-weight: bold;
+}
+  
+.icons span {
+    margin-left: 15px; /* Ajuste o espaçamento entre os ícones */
+    font-size: 24px; /* Ajuste o tamanho da fonte conforme necessário */
+}
+  
+
+
+
+/* Estilize a seção de banner */
+.banner {
+    background-size: cover;
+    height: 900px;
+    background-image: url('../imagens/fattebanner.png');
+    background-position: center;
+}
+
+.fotos {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+/* Estilize a seção de galeria */
+.galeria {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.galeria a {
+    flex: 1;
+    background-size: cover;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+    margin-bottom: 40px;
+}
+
+.galeria3 {
+    width: 350px;
+}
+
+/* Adicione estilos aos botões */
+.btn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #0c0c0c;
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+
+
+}
+
+.footer-right {
+
+}
+
+.sobre {
+    margin: 0 auto;
+    justify-content: center;
+    text-align: justify;
+}
+
+.sobre h1{
+    font-family: Arial, sans-serif;
+    margin: 50px 0px 0px 150px;
+    padding: 0px;
+    
+
+}
+
+.sobre p{
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+  }
+
+.sobre img {
+    width: 1520px;
+    height: 1080px;
+}
