@@ -171,8 +171,150 @@ footer {
 
 .footer-left {
 
-
 }
 
 .footer-right {
+    
+}
+
+.instagram {
+    display: flex;
+}
+
+.instagram p{
+    margin-top: 5px;
+}
+
+.twitter {
+    display: flex;
+}
+
+.twitter p {
+    margin-top: 5px;
+}
+
+.facebook {
+    display: flex;
+}
+
+.facebook p {
+    margin-top: 7px;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 1330px) {
+    .header {
+        width: 90%;
+    }
+
+    .galeria {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 10px 20px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .menu li {
+        margin-right: 15px; 
+        font-size: 16px; 
+    }
+
+    .icons span {
+        font-size: 20px;
+    }
+
+    .banner {
+        height: 500px;
+    }
+
+    .fotos {
+        font-size: 24px;
+    }
+
+    .galeria a {
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 100%;
+        flex-direction: column; 
+        height: auto; 
+    }
+
+    .card p {
+        flex: none;
+        height: auto; 
+    }
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    footer {
+        padding: 20px;
+    }
+
+    .footer-left,
+    .footer-right {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .header {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .menu li {
+        margin-right: 10px; 
+        font-size: 14px; 
+    }
+
+    .icons span {
+        font-size: 18px; 
+    }
+
+    .banner {
+        height: 400px;
+    }
+
+    .fotos {
+        font-size: 20px;
+    }
+
+    .galeria a {
+        margin-bottom: 15px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    footer {
+        padding: 15px;
+    }
 }

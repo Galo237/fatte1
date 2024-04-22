@@ -73,9 +73,18 @@
         </div>
         <div class="footer-right">
             <h3>REDES SOCIAIS</h3>
-            <a class="instagram"></a><img src="imagens/instagram.png" alt=""><p>@fatteclothing</p>
-            <a class="twitter"><img src="imagens/twitter.png" alt=""></a><p>@fatteclothing</p>
-            <a class="facebook"><img src="imagens/facebook.png" alt=""></a><p>Fatte Clothing</p>
+            <div class="instagram">
+                <a href="https://www.instagram.com/fatteclothing?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="imagens/instagram.png" alt=""></a>
+                <p>@fatteclothing</p>
+            </div>
+            <div class="twitter">
+                <a href=""><img src="imagens/twitter.png" alt=""></a>
+                <p>@fatteclothing</p>
+            </div>
+            <div class="facebook">
+                <a><img src="imagens/facebook.png" alt=""></a>
+                <p>Fatte Clothing</p>
+            </div>
         </div>       
     </footer>
 
