@@ -1,61 +1,204 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 20px;
+/* Defina o estilo global do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 30px;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
 }
-
-.header-left h1 {
-    font-size: 48px;
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-/* Centralize o header-center */
-.header-center {
-    flex: 1;
-    text-align: center;
-    margin-left: 350px;
-}
-
-.header-center a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #000000;
+  
+.logo a{
+    font-size: 40px;
     font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+  
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.menu li {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+  
+.icons span {
+    margin-left: 15px;
+    font-size: 24px;
 }
 
-/* Estilize os ícones no cabeçalho */
-.header-right span {
-    margin-right: 10px;
-    font-size: 18px;
-    color: #fff;
-}
-
-/* Alinhe o header-right à direita */
-.header-right {
-    display: flex;
+.page-inner-content {
+    margin: auto;
+    justify-content: center;
     align-items: center;
-    margin-left: auto; /* Adicione esta linha para alinhar à direita */
+    margin-top: 2rem;
 }
 
-.search-icon {
-    background-image: url('../imagens/search.png');
+.product {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 40px;
+    margin-left: 20px;
 }
 
-.cart-icon {
-    background-image: url('../imagens/cart.png');
+.roupa {
+    margin-top: 5rem;
 }
 
-.user-icon {
-    background-image: url('../imagens/user.png');
+.roupa img{
+    width: 320px;
+    height: 300px;
+}
+
+.roupa p {
+    text-align: center;
+    font-family: Verdana;
+}
+
+/* Footer */
+footer {
+    background-color: #0c0c0c;
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.footer-left {
+
+}
+
+.footer-right {
+    
+}
+
+.instagram {
+    display: flex;
+}
+
+.instagram p{
+    margin-top: 5px;
+}
+
+.twitter {
+    display: flex;
+}
+
+.twitter p {
+    margin-top: 5px;
+}
+
+.facebook {
+    display: flex;
+}
+
+.facebook p {
+    margin-top: 7px;
+}
+
+/* Media query */
+@media screen and (max-width: 1330px) {
+    .header {
+        width: 100%;
+        position: absolute;
+    }
+
+    .menu ul {
+        display: none;
+        align-items: center;
+        margin-left: 30px;
+    }
+
+    .product {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 900px) { 
+    .product {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 10px 20px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .menu li {
+        margin-right: 15px; 
+        font-size: 16px; 
+    }
+
+    .icons span {
+        font-size: 20px;
+    }
+
+    footer {
+        padding: 20px;
+    }
+
+    .footer-left,
+    .footer-right {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .product {
+        display: block;
+
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .header {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .menu li {
+        margin-right: 10px; 
+        font-size: 14px; 
+    }
+
+    .icons span {
+        font-size: 18px; 
+    }
+
+    footer {
+        padding: 15px;
+    }
 }
