@@ -113,6 +113,7 @@ CREATE TABLE `produtos` (
   `proDescricao` mediumblob,
   `proTipo` varchar(60) DEFAULT NULL,
   `proTamanho` enum('P','M','G') DEFAULT 'M',
+  `proImagem` blob,
   PRIMARY KEY (`proId`),
   KEY `fk_produtos_administrador1_idx` (`proAdmId`),
   KEY `fk_produtos_pedidos1_idx` (`proPedId`),
@@ -139,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18 22:14:58
+-- Dump completed on 2024-04-22 12:26:26
