@@ -9,14 +9,17 @@
 <body>
 <header>
         <div class="header">
-            <div class="logo">Fatte</div>
-                <nav class="menu">
-                    <ul>
-                        <li>Destaque</li>
-                        <li>Masculino</li>
-                        <li>Feminino</li>
-                        <li>Sobre</li>
-                    </ul>
+                <div class="logo"><a href="../index.php">Fatte</a></div>
+                <nav id="nav">
+                        <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+                            <span id="hamburger"></span>
+                        </button>
+                        <ul id="menu" role="menu">
+                            <li><a href="">Destaque</a></li>
+                            <li><a href="masculino.php">Masculino</a></li>
+                            <li><a href="feminino.php">Feminino</a></li>
+                            <li><a href="sobre.php">Sobre</a></li>
+                        </ul>
                 </nav>
             <div class="icons">
                 <span class="search-icon"><img src="../imagens/search.png" alt=""></span>
@@ -65,5 +68,7 @@ Junte-se a nós em nossa jornada enquanto continuamos a redefinir os limites da 
             <a class="facebook"><img src="imagens/facebook.png" alt=""></a><p>Fatte Clothing</p>
         </div>
 </footer>
+
+<script src="../js/script.js"></script>
 </body>
 </html>

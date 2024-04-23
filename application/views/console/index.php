@@ -10,12 +10,15 @@
     <header>
         <div class="header">
             <div class="logo">Fatte</div>
-                <nav class="menu">
-                    <ul>
-                        <a href=""><li class="btn">Destaque</li></a>
-                        <a href="pages/masculino.php"><li class="btn">Masculino</li></a>
-                        <a href="pages/feminino.php"><li class="btn">Feminino</li></a>
-                        <a href="pages/sobre.php"><li class="btn">Sobre</li></a>
+                <nav id="nav">
+                    <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+                        <span id="hamburger"></span>
+                    </button>
+                    <ul id="menu" role="menu">
+                        <li><a href="">Destaque</a></li>
+                        <li><a href="pages/masculino.php">Masculino</a></li>
+                        <li><a href="pages/feminino.php">Feminino</a></li>
+                        <li><a href="pages/sobre.php">Sobre</a></li>
                     </ul>
                 </nav>
             <div class="icons">
@@ -33,9 +36,9 @@
         <h3 class="fotos">GALERIA</h3>
     </a>
     <section class="galeria">
-        <a><img src="imagens/galeria1.jpg" alt=""></a>
-        <a><img src="imagens/galeria2.jpg" alt=""></a>
-        <a><img class="galeria3" src="imagens/galeria3.jpg" alt=""></a>
+        <a class="link"><img src="imagens/galeria1.jpg" alt=""></a>
+        <a class="link"><img src="imagens/galeria2.jpg" alt=""></a>
+        <a class="link"><img class="galeria3" src="imagens/galeria3.jpg" alt=""></a>
     </section>
 
     <section class="featured-products">
@@ -45,20 +48,20 @@
     <h3 class="destaques">DESTAQUES</h3>
 
     <div class="card">
-    <p>
-      <a href=""><img src="imagens/masculino.jpg" alt="masculino"></a>
-      <span>Masculino</span>
-    </p>
-    <p>
-      <a href=""><img src="imagens/feminino.jpg" alt="feminino"></a>
-      <span>Feminino</span></p>
-    <p>
-      <a href=""><img src="imagens/acessorios.jpg" alt="acessorios"></a>
-      <span>Acessórios</span></p>
-    <p>
-      <a href=""><img src="imagens/kits.jpg" alt="kits"></a>
-      <span>Kits</span></p>
-</div>
+        <p>
+        <a href=""><img src="imagens/masculino.jpg" alt="masculino"></a>
+        <span>Masculino</span>
+        </p>
+        <p>
+        <a href=""><img src="imagens/feminino.jpg" alt="feminino"></a>
+        <span>Feminino</span></p>
+        <p>
+        <a href=""><img src="imagens/acessorios.jpg" alt="acessorios"></a>
+        <span>Acessórios</span></p>
+        <p>
+        <a href=""><img src="imagens/kits.jpg" alt="kits"></a>
+        <span>Kits</span></p>
+    </div>
 
 
     <footer>
@@ -88,6 +91,6 @@
         </div>       
     </footer>
 
-    <script src="js/scripts.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

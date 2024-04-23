@@ -9,13 +9,16 @@
 <body>
     <div class="header">
             <div class="logo"><a href="../index.php">Fatte</a></div>
-            <nav class="menu">
-                <ul>
-                    <a href=""><li class="btn">Destaque</li></a>
-                    <a href="pages/masculino.php"><li class="btn">Masculino</li></a>
-                    <a href="pages/feminino.php"><li class="btn">Feminino</li></a>
-                    <a href="pages/sobre.php"><li class="btn">Sobre</li></a>
-                </ul>
+            <nav id="nav">
+                    <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+                        <span id="hamburger"></span>
+                    </button>
+                    <ul id="menu" role="menu">
+                        <li><a href="">Destaque</a></li>
+                        <li><a href="masculino.php">Masculino</a></li>
+                        <li><a href="feminino.php">Feminino</a></li>
+                        <li><a href="sobre.php">Sobre</a></li>
+                    </ul>
             </nav>
         <div class="icons">
             <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
