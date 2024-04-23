@@ -1,3 +1,9 @@
+<?php
+// Iniciar a sessão
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,7 +30,17 @@
             <div class="icons">
                 <span class="search-icon"><img src="imagens/search1.png" alt=""></span>
                 <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="imagens/cart1.png" alt=""></span></a>
-                <a href="pages/cadastro.php"><span class="profile-icon"><img src="imagens/user1.png" alt=""></span></a>
+                <?php
+                    // Verificar se o usuário está logado
+                    if(isset($_SESSION['usuario'])) {
+                        $nome_usuario = $_SESSION['usuario'];
+                        // Exibir o nome do usuário no lugar do ícone de usuário
+                        echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                    } else {
+                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
+                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";
+                    }
+                ?>
             </div> 
         </div> 
     </header>

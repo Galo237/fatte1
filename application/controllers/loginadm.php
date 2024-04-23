@@ -4,7 +4,7 @@ session_start();
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Incluir o arquivo de conexão com o banco de dados
-    include '../../../controllers/connection.php';
+    include 'connection.php';
 
     // Coletar os dados do formulário
     $email = $_POST['email'];
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['usuario'] = $row['cliNome'];
 
         // Redirecionar para o index.php após o login bem-sucedido
-        header("Location: ../index.php");
+        header("Location: listagem.php");
         exit;
     } else {
         // Redirecionar de volta para o login se as credenciais estiverem incorretas
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../views/console/css/login.css">
     <title>Fatte - Login</title>
 </head>
 <body>
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" name="submit" value="Entrar">
             </form>
             <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p>
-            <p>Login como <a href="../../../controllers/loginadm.php">Administrador</a>
+            <p>Login como <a href="listagem.php">Administrador</a>
         </div>
     </section>
 </body>

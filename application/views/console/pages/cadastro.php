@@ -1,5 +1,39 @@
 <?php
 
+session_start();
+// Verificar se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Incluir o arquivo de conexão com o banco de dados
+    include '../../../controllers/connection.php';
+
+    // Coletar os dados do formulário
+    $nome = $_POST['firstname'];
+    $telefone = $_POST['telefone'];
+    $email = $_POST['email'];
+    $senha = $_POST['password'];
+    $genero = $_POST['gender'];
+
+    // Definir as variáveis de sessão
+    $_SESSION['usuario'] = $nome;
+    $_SESSION['email'] = $email;
+    $_SESSION['telefone'] = $telefone;
+    $_SESSION['gender'] = $genero;
+
+    // Consulta SQL para inserir o novo usuário na tabela cliente
+    $sql = "INSERT INTO cliente (cliNome, cliTelefone, cliEmail, cliSenha, cliGenero) VALUES ('$nome', '$telefone', '$email', '$senha', '$genero')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirecionar para a página de login após o cadastro bem-sucedido
+        header("Location: login.php");
+        exit;
+    } else {
+        echo "Erro ao cadastrar o usuário: " . $conn->error;
+    }
+
+
+    // Fechar a conexão com o banco de dados
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +53,7 @@
             <img src="../imagens/banner2.png" alt="">
         </div>
         <div class="form">
-            <form action="#">
+            <form action="cadastro.php" method="POST">
                 <div class="form-header">
                     <div class="title">
                         <h1>Cadastre-se</h1>
@@ -70,22 +104,22 @@
 
                     <div class="gender-group">
                         <div class="gender-input">
-                            <input id="female" type="radio" name="gender">
+                            <input id="female" type="radio" name="gender" value="F">
                             <label for="female">Feminino</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="male" type="radio" name="gender">
+                            <input id="male" type="radio" name="gender" value="M">
                             <label for="male">Masculino</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="others" type="radio" name="gender">
+                            <input id="others" type="radio" name="gender" value="O">
                             <label for="others">Outros</label>
                         </div>
 
                         <div class="gender-input">
-                            <input id="none" type="radio" name="gender">
+                            <input id="none" type="radio" name="gender" value="N">
                             <label for="none">Prefiro não dizer</label>
                         </div>
                     </div>
