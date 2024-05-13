@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['firstname'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
-    $senha = $_POST['password'];
+    $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $genero = $_POST['gender'];
 
     // Definir as variáveis de sessão
@@ -85,14 +85,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="input-box">
                         <label for="password">Senha</label>
-                        <input id="password" type="password" name="password" placeholder="Digite sua senha" onchange='confereSenha();' required>
+                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                        <span id="message"></span>
                     </div>
 
 
                     <div class="input-box">
                         <label for="confirmPassword">Confirme sua Senha</label>
-                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" onchange='confereSenha();' required>
-                        <span id="message"></span>
+                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
+                        <span id="message-confirm"></span>
                     </div>
 
                 </div>
@@ -126,13 +127,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="continue-button">
-                    <button id="continue-button" name="submit"><a href="#">Continuar</a> </button>
+                    <button id="continue-button" name="submit"><a href="#">Continuar</a></button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src=".../js/cadastro.js"></script>
+    <script src="../js/cadastro.js"></script>
 </body>
 
 </html>

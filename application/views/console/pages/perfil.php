@@ -28,8 +28,35 @@ if(isset($_SESSION['usuario'])) {
 </head>
 <body>
     <header>
-        <!-- Cabeçalho da página -->
-        <h1>Seu Perfil</h1>
+        <div class="header">
+            <div class="logo">Fatte</div>
+                <nav id="nav">
+                    <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+                        <span id="hamburger"></span>
+                    </button>
+                    <ul id="menu" role="menu">
+                        <li><a href="">Destaque</a></li>
+                        <li><a href="pages/masculino.php">Masculino</a></li>
+                        <li><a href="pages/feminino.php">Feminino</a></li>
+                        <li><a href="pages/sobre.php">Sobre</a></li>
+                    </ul>
+                </nav>
+            <div class="icons">
+                <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
+                <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
+                <?php
+                    // Verificar se o usuário está logado
+                    if(isset($_SESSION['usuario'])) {
+                        $nome_usuario = $_SESSION['usuario'];
+                        // Exibir o nome do usuário no lugar do ícone de usuário
+                        echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                    } else {
+                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
+                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";
+                    }
+                ?>
+            </div> 
+        </div> 
     </header>
 
     <div class="container">

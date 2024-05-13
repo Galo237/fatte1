@@ -127,8 +127,9 @@ body {
 }
 
 #message {
-    font-size: 12px;
-    width: 150px;
+    font-size: 10px;
+    color: red;
+    display: block;
 }
 
 .gender-group {

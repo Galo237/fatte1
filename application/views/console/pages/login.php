@@ -10,22 +10,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    // Consulta SQL para verificar se o usuário e a senha correspondem
-    $sql = "SELECT * FROM cliente WHERE cliEmail = '$email' AND cliSenha = '$senha'";
+    // Consulta SQL para verificar se o usuário com o email fornecido existe no banco de dados
+    $sql = "SELECT * FROM cliente WHERE cliEmail = '$email'";
     $result = $conn->query($sql);
 
-
     if ($result->num_rows == 1) {
-        // Iniciar a sessão e armazenar o nome do usuário
-        session_start();
+        // Recuperar a senha criptografada do banco de dados
         $row = $result->fetch_assoc();
-        $_SESSION['usuario'] = $row['cliNome'];
+        $senha_hash = $row['cliSenha']; 
 
-        // Redirecionar para o index.php após o login bem-sucedido
-        header("Location: ../index.php");
-        exit;
+        // Verificar se a senha fornecida corresponde à senha criptografada no banco de dados
+        if (password_verify($senha, $senha_hash)) {
+            // Iniciar a sessão e armazenar o nome do usuário
+            $_SESSION['usuario'] = $row['cliNome'];
+            $_SESSION['telefone'] = $row['cliTelefone'];
+            $_SESSION['email'] = $row['cliEmail'];
+            $_SESSION['gender'] = $row['cliGenero'];
+
+            // Redirecionar para o index.php após o login bem-sucedido
+            header("Location: ../index.php");
+            exit;
+        } else {
+            // Redirecionar de volta para o login se as credenciais estiverem incorretas
+            header("Location: login.php?erro=1");
+            exit;
+        }
     } else {
-        // Redirecionar de volta para o login se as credenciais estiverem incorretas
+        // Redirecionar de volta para o login se o email não for encontrado
         header("Location: login.php?erro=1");
         exit;
     }

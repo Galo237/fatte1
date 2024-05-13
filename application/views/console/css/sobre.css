@@ -157,6 +157,7 @@ footer {
     .imgsobre {
         background-size: cover;
         width: fit-content;
+        background-position: center center;
     }
 
     #menu {

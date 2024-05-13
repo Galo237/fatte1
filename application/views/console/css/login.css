@@ -105,3 +105,7 @@ a {
     margin-left: 3px;
     font-weight: bold;
 }
+
+p:hover {
+    color: #716d6d;
+}
