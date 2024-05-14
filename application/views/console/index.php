@@ -2,6 +2,15 @@
 // Iniciar a sessão
 session_start();
 
+if(isset($_GET['logout'])) {
+    // Encerrar a sessão
+    session_unset();
+    session_destroy();
+    // Redirecionar para a página inicial
+    header("Location: index.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +45,7 @@ session_start();
                         $nome_usuario = $_SESSION['nome'];
                         // Exibir o nome do usuário no lugar do ícone de usuário
                         echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                        echo "<a href='?logout' class='logout'><img src='imagens/logout.png' alt=''></a>";
                     } else {
                         // Se o usuário não estiver logado, exibir o ícone de usuário padrão
                         echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";

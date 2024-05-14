@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: fatte
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `administrador` (
   `admSenha` varchar(50) DEFAULT NULL,
   `admNome` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`admId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,33 @@ LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
 INSERT INTO `administrador` VALUES (1,'momoide@gmail.com','master100','Momo');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria` (
+  `catId` int NOT NULL AUTO_INCREMENT,
+  `catProId` int NOT NULL,
+  `catNome` varchar(100) DEFAULT NULL,
+  `catGenero` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`catId`),
+  KEY `fk_categoria_produtos1_idx` (`catProId`),
+  CONSTRAINT `fk_categoria_produtos1` FOREIGN KEY (`catProId`) REFERENCES `produtos` (`proId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +86,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`cliId`),
   KEY `fk_cliente_administrador1_idx` (`cliAdmId`),
   CONSTRAINT `fk_cliente_administrador1` FOREIGN KEY (`cliAdmId`) REFERENCES `administrador` (`admId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +95,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,NULL,'lucas@dev.com','Master@100','Pablo','41991591003','N');
+INSERT INTO `cliente` VALUES (1,NULL,'lucas@dev.com','Master@100','Pablo','41991591003','N'),(2,NULL,'rafael@dev.com','','Rafael','41991591003','M'),(3,NULL,'kucha@dev.com','','Kucha','41991591003','M'),(4,NULL,'rafael@gmail.com','$2y$10$RiBTQzUubib1nzJKiip7pO3IsEdXixpUl6k27K9xRZAMdp6ndNtZe','rafael','41991591003','M'),(5,NULL,'carlos@gmail.com','$2y$10$Q.I3u66FaDy65MQQSUGqH.uA.0Yd/MY6tiNDF6kAOKgb4FRkwxQiK','Carlos','41991591003','M');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +116,7 @@ CREATE TABLE `itenspedido` (
   KEY `fk_itensPedido_pedidos1_idx` (`itpPedId`),
   CONSTRAINT `fk_itensPedido_pedidos1` FOREIGN KEY (`itpPedId`) REFERENCES `pedidos` (`pedId`),
   CONSTRAINT `fk_itensPedido_produtos1` FOREIGN KEY (`itpProId`) REFERENCES `produtos` (`proId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,13 +137,16 @@ DROP TABLE IF EXISTS `pedidos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pedidos` (
   `pedId` int NOT NULL AUTO_INCREMENT,
+  `pedStaId` int DEFAULT NULL,
   `pedCliId` int DEFAULT NULL,
   `pedCodigo` varchar(30) DEFAULT NULL,
   `pedData` datetime DEFAULT NULL,
   PRIMARY KEY (`pedId`),
   KEY `fk_pedidos_cliente1_idx` (`pedCliId`),
-  CONSTRAINT `fk_pedidos_cliente1` FOREIGN KEY (`pedCliId`) REFERENCES `cliente` (`cliId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_pedidos_status1_idx` (`pedStaId`),
+  CONSTRAINT `fk_pedidos_cliente1` FOREIGN KEY (`pedCliId`) REFERENCES `cliente` (`cliId`),
+  CONSTRAINT `fk_pedidos_status1` FOREIGN KEY (`pedStaId`) REFERENCES `status` (`staId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +178,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`proId`),
   KEY `fk_produtos_administrador1_idx` (`proAdmId`),
   CONSTRAINT `fk_produtos_administrador1` FOREIGN KEY (`proAdmId`) REFERENCES `administrador` (`admId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,8 +187,33 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,NULL,'Casaco do Bucetão','M',120,_binary 'Utomo do cabeção','Casaco','M',''),(2,NULL,'Camisa do Utomo','M',200,_binary 'O utomo foi a loucura!!','Camisa','P',''),(3,NULL,'Calça do PUC','M',300,_binary 'Quem não quer uma calça da pontifícia','Calça','G','');
+INSERT INTO `produtos` VALUES (1,NULL,'Casaco do Vale','M',120,_binary 'Utomo da fatte.','Casaco','M',''),(2,NULL,'Camisa do Utomo','M',200,_binary 'O utomo foi a loucura!!','Camisa','P',''),(3,NULL,'Calça do PUC','M',300,_binary 'Quem não quer uma calça da pontifícia','Calça','G',''),(4,NULL,'Through The Valley','F',130,_binary 'O melhor top para o verão','Top','P',''),(5,NULL,'abc','M',12,_binary 'abcde','cde','P',''),(6,NULL,'teste','M',1200,_binary 'Para de falar que tu é minha namorrrrrrr','teste','P',''),(7,NULL,'Casaquin do Totomo','M',250,_binary 'Ta frio!!','casaquin','G',''),(8,NULL,'fatte','F',100,_binary 'top','Top','P','');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `status` (
+  `staId` int NOT NULL AUTO_INCREMENT,
+  `staCor` varchar(100) DEFAULT NULL,
+  `staNome` varchar(100) DEFAULT NULL,
+  `staIcone` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`staId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status`
+--
+
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -170,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-14  1:09:32
+-- Dump completed on 2024-05-14 11:08:20

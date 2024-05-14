@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+include '../../../controllers/connection.php';
+
+if(isset($_GET['logout'])) {
+    // Encerrar a sessão
+    session_unset();
+    session_destroy();
+    // Redirecionar para a página inicial
+    header("Location: ../index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +39,18 @@
             <div class="icons">
                 <span class="search-icon"><img src="../imagens/search.png" alt=""></span>
                 <span class="cart-icon"><img src="../imagens/cart.png" alt=""></span>
-                <a href="pages/cadastro.php"><span class="profile-icon"><img src="../imagens/user.png" alt=""></span></a>
+                <?php
+                    // Verificar se o usuário está logado
+                    if(isset($_SESSION['cliente'])) {
+                        $nome_usuario = $_SESSION['nome'];
+                        // Exibir o nome do usuário no lugar do ícone de usuário
+                        echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                        echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
+                    } else {
+                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
+                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";
+                    }
+                ?>
             </div> 
         </div> 
 </header>

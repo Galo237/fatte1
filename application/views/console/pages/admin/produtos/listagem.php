@@ -33,7 +33,18 @@ if(isset($_POST['submit'])) {
     $preco = $_POST['preco'];
     $tipo = $_POST['tipo'];
     $tamanho = $_POST['tamanho'];
-    $imagem = $_POST['imagem'];
+    
+    // Upload de imagem
+    $imagem = "";
+    if(isset($_FILES['proImagem']) && $_FILES['proImagem']['error'] == UPLOAD_ERR_OK) {
+        $uploadDir = "uploads/";
+        $uploadFile = $uploadDir . basename($_FILES['proImagem']['name']);
+        if (move_uploaded_file($_FILES['proImagem']['tmp_name'], $uploadFile)) {
+            $imagem = $uploadFile;
+        } else {
+            showAlert("Erro ao fazer upload da imagem", 'danger');
+        }
+    }
     
     $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho', '$imagem')";
     if ($conn->query($sql) === TRUE) {
@@ -178,4 +189,6 @@ function previewImage() {
         reader.readAsDataURL(fileInput);
     }
 }
+
+
 </script>

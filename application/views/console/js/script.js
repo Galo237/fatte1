@@ -16,3 +16,13 @@ function toggleMenu(event) {
 
 btnMobile.addEventListener('click', toggleMenu);
 btnMobile.addEventListener('touchstart', toggleMenu);
+
+
+// Função para confirmar logout
+function confirmLogout(event) {
+    event.preventDefault();
+    var userConfirmed = confirm("Você realmente deseja se deslogar?");
+    if (userConfirmed) {
+        window.location.href = "?logout";
+    }
+}

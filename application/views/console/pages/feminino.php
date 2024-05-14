@@ -7,6 +7,15 @@ include '../../../controllers/connection.php';
 $sql = "SELECT * FROM produtos WHERE proGenero = 'F'";
 $result = $conn->query($sql);
 
+if(isset($_GET['logout'])) {
+    // Encerrar a sessão
+    session_unset();
+    session_destroy();
+    // Redirecionar para a página inicial
+    header("Location: ../index.php");
+    exit;
+}
+
 ?>
 
 
@@ -35,7 +44,18 @@ $result = $conn->query($sql);
         <div class="icons">
             <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
             <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
-            <a href="pages/cadastro.php"><span class="profile-icon"><img src="../imagens/user1.png" alt=""></span></a>
+            <?php
+                    // Verificar se o usuário está logado
+                    if(isset($_SESSION['cliente'])) {
+                        $nome_usuario = $_SESSION['nome'];
+                        // Exibir o nome do usuário no lugar do ícone de usuário
+                        echo "<a href='perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                        echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
+                    } else {
+                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
+                        echo "<a href='perfil.php'><span class='user-icon'><img src='../imagens/user1.png' alt=''></span></a>";
+                    }
+                ?>
         </div> 
     </div>
     <h3>Catálogo Feminino</h3>

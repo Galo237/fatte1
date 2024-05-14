@@ -44,7 +44,8 @@ if(isset($_POST['update'])) {
     $tamanho = $_POST['proTamanho'];
 
     // Upload de imagem
-    if($_FILES['proImagem']['name'] != "") {
+    $imagem = "";
+    if(isset($_FILES['proImagem']) && $_FILES['proImagem']['error'] == UPLOAD_ERR_OK) {
         $uploadDir = "uploads/";
         $uploadFile = $uploadDir . basename($_FILES['proImagem']['name']);
         if (move_uploaded_file($_FILES['proImagem']['tmp_name'], $uploadFile)) {
@@ -52,8 +53,6 @@ if(isset($_POST['update'])) {
         } else {
             showAlert("Erro ao fazer upload da imagem", 'danger');
         }
-    } else {
-        $imagem = $produto['proImagem'];
     }
 
     $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proTamanho='$tamanho', proImagem='$imagem' WHERE proId=$id";

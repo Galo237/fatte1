@@ -94,7 +94,7 @@ if(isset($_POST['submit'])) {
 
                     <div class="input-box">
                         <label for="nova_senha">Nova Senha</label>
-                        <input id="nova_senha" type="password" name="nova_senha" placeholder="Digite sua nova senha" required>
+                        <input id="nova_senha" type="password" name="nova_senha" placeholder="Digite sua nova senha">
                     </div>
 
                     <div class="input-box">
