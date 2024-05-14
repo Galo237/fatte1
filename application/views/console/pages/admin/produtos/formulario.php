@@ -2,7 +2,7 @@
 session_start();
 
 // Incluir o arquivo de conexão com o banco de dados
-include 'connection.php';
+include '../../../../../controllers/connection.php';
 
 // Verificar se o usuário está logado
 // verificarLogin();
@@ -42,8 +42,21 @@ if(isset($_POST['update'])) {
     $descricao = $_POST['proDescricao'];
     $tipo = $_POST['proTipo'];
     $tamanho = $_POST['proTamanho'];
-    
-    $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proTamanho='$tamanho' WHERE proId=$id";
+
+    // Upload de imagem
+    if($_FILES['proImagem']['name'] != "") {
+        $uploadDir = "uploads/";
+        $uploadFile = $uploadDir . basename($_FILES['proImagem']['name']);
+        if (move_uploaded_file($_FILES['proImagem']['tmp_name'], $uploadFile)) {
+            $imagem = $uploadFile;
+        } else {
+            showAlert("Erro ao fazer upload da imagem", 'danger');
+        }
+    } else {
+        $imagem = $produto['proImagem'];
+    }
+
+    $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proTamanho='$tamanho', proImagem='$imagem' WHERE proId=$id";
     if ($conn->query($sql) === TRUE) {
         showAlert("Produto atualizado com sucesso", 'success');
     } else {
@@ -65,7 +78,7 @@ if(isset($_POST['update'])) {
 
 <div class="container mt-5">
     <h2>Editar Produto</h2>
-    <form method="POST" class="mt-4">
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
         <input type="hidden" name="proId" value="<?php echo $produto['proId']; ?>">
         <div class="form-group">
             <label for="nome">Nome:</label>
@@ -92,6 +105,14 @@ if(isset($_POST['update'])) {
             <label for="tamanho">Tamanho:</label>
             <input type="text" class="form-control" id="tamanho" name="proTamanho" value="<?php echo $produto['proTamanho']; ?>" required>
         </div>
+        <div class="form-group">
+            <label for="imagem">Imagem:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imagem" name="proImagem" onchange="previewImage()">
+                <label class="custom-file-label" for="imagem">Escolher arquivo de imagem a ser adicionado!</label>
+            </div>
+            <img id="preview" src="#" alt="Pré-visualização da Imagem" style="display: none; max-width: 100%; max-height: 200px;">
+        </div>
         <button type="submit" class="btn btn-primary" name="update">Atualizar Produto</button>
         <a href="listagem.php" class="btn btn-primary" name="back">Voltar</a>
     </form>
@@ -99,3 +120,20 @@ if(isset($_POST['update'])) {
 
 </body>
 </html>
+
+<script>
+function previewImage() {
+    var preview = document.getElementById('preview');
+    var fileInput = document.getElementById('imagem').files[0];
+    var reader = new FileReader();
+
+    reader.onload = function() {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    }
+
+    if (fileInput) {
+        reader.readAsDataURL(fileInput);
+    }
+}
+</script>

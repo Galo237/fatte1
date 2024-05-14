@@ -32,8 +32,8 @@ session_start();
                 <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="imagens/cart1.png" alt=""></span></a>
                 <?php
                     // Verificar se o usuário está logado
-                    if(isset($_SESSION['usuario'])) {
-                        $nome_usuario = $_SESSION['usuario'];
+                    if(isset($_SESSION['cliente'])) {
+                        $nome_usuario = $_SESSION['nome'];
                         // Exibir o nome do usuário no lugar do ícone de usuário
                         echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
                     } else {
@@ -44,9 +44,10 @@ session_start();
             </div> 
         </div> 
     </header>
-
+    <hr>
     <section class="banner">
     </section>
+    <br>
 
     <a>
         <h3 class="fotos">GALERIA</h3>
@@ -56,6 +57,8 @@ session_start();
         <a class="link"><img src="imagens/galeria2.jpg" alt=""></a>
         <a class="link"><img class="galeria3" src="imagens/galeria3.jpg" alt=""></a>
     </section>
+
+    <hr>
 
     <section class="featured-products">
 
@@ -79,6 +82,9 @@ session_start();
         <span>Kits</span></p>
     </div>
 
+    <br>
+    <br>
+    <br>
 
     <footer>
         <div class="footer-left">

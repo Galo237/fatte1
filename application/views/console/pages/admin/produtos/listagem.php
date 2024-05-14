@@ -1,8 +1,17 @@
 <?php
 session_start();
 
+if(isset($_GET['logout'])) {
+    // Encerrar a sessão
+    session_unset();
+    session_destroy();
+    // Redirecionar para a página inicial
+    header("Location: ../../../index.php");
+    exit;
+}
+
 // Incluir o arquivo de conexão com o banco de dados
-include 'connection.php';
+include '../../../../../controllers/connection.php';
 
 // Verificar se o usuário está logado
 // verificarLogin();
@@ -24,8 +33,9 @@ if(isset($_POST['submit'])) {
     $preco = $_POST['preco'];
     $tipo = $_POST['tipo'];
     $tamanho = $_POST['tamanho'];
+    $imagem = $_POST['imagem'];
     
-    $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho')";
+    $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho', '$imagem')";
     if ($conn->query($sql) === TRUE) {
         header("Location: listagem.php?success=1");
     
@@ -62,13 +72,16 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRUD de Produtos</title>
+<title>Cadastro de Produtos</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
 <div class="container mt-5">
-    <h2>CRUD de Produtos</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="?logout" class="btn btn-danger">Logout</a>
+    </div>
+    <h2>Cadastro de Produtos</h2>
     <form method="POST" class="mt-4">
         <div class="form-group">
             <label for="nome">Nome:</label>
@@ -94,14 +107,23 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
             <label for="tamanho">Tamanho:</label>
             <input type="text" class="form-control" id="tamanho" name="tamanho" required>
         </div>
+        <div class="form-group">
+            <label for="imagem">Imagem:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imagem" name="proImagem" onchange="previewImage()">
+                <label class="custom-file-label" for="imagem">Escolher arquivo de imagem a ser adicionado!</label>
+            </div>
+            <img id="preview" src="#" alt="Pré-visualização da Imagem" style="display: none; max-width: 100%; max-height: 200px;">
+        </div>
         <button type="submit" class="btn btn-primary" name="submit">Adicionar Produto</button>
     </form>
 
     <h3 class="mt-5">Lista de Produtos</h3>
     <table class="table mt-3">
-        <thead>
+    <thead>
             <tr>
                 <th>ID</th>
+                <th>Imagem</th>
                 <th>Nome</th>
                 <th>Gênero</th>
                 <th>Preço</th>
@@ -117,6 +139,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
                             <td>{$row['proId']}</td>
+                            <td><img src='{$row['proImagem']}' alt='Imagem do Produto' style='max-width: 100px; max-height: 100px;'></td>
                             <td>{$row['proNome']}</td>
                             <td>{$row['proGenero']}</td>
                             <td>{$row['proPreco']}</td>
@@ -130,7 +153,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                         </tr>";
                 }
             } else {
-                echo "<tr><td colspan='8'>Nenhum produto encontrado</td></tr>";
+                echo "<tr><td colspan='9'>Nenhum produto encontrado</td></tr>";
             }
             ?>
         </tbody>
@@ -139,3 +162,20 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
 
 </body>
 </html>
+
+<script>
+function previewImage() {
+    var preview = document.getElementById('preview');
+    var fileInput = document.getElementById('imagem').files[0];
+    var reader = new FileReader();
+
+    reader.onload = function() {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    }
+
+    if (fileInput) {
+        reader.readAsDataURL(fileInput);
+    }
+}
+</script>

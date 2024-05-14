@@ -95,14 +95,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin-top: 3rem;
-}
-
-.footer-left {
-
-}
-
-.footer-right {
-    
+    bottom: 0;
 }
 
 .instagram {

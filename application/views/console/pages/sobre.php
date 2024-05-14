@@ -28,8 +28,11 @@
             </div> 
         </div> 
 </header>
+
     <div class="sobre">
         <span class="imgsobre"><img src="../imagens/sobre.jpg" alt=""></span>
+        <br>
+        <hr>
         <h1>Sobre nós</h1>
         <p>No coração de uma cidade agitada, onde os sons das ruas se misturam com a energia pulsante da vida urbana, nasceu uma ideia que iria mudar o mundo da moda para sempre. Em um pequeno estúdio, um grupo de visionários se reuniu com um propósito: criar uma marca que não apenas vestisse corpos, mas também contasse histórias. Assim nasceu "Fatte".
 
@@ -48,6 +51,9 @@ Junte-se a nós em nossa jornada enquanto continuamos a redefinir os limites da 
 
     
     </div>
+
+    <br>
+    <br>
 
 
 

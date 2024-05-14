@@ -1,3 +1,15 @@
+<?php
+// Iniciar a sessão
+session_start();
+
+include '../../../controllers/connection.php';
+
+$sql = "SELECT * FROM produtos WHERE proGenero = 'F'";
+$result = $conn->query($sql);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,69 +38,23 @@
             <a href="pages/cadastro.php"><span class="profile-icon"><img src="../imagens/user1.png" alt=""></span></a>
         </div> 
     </div>
+    <h3>Catálogo Feminino</h3>
     <div class="page-inner-content">
-            <div class="product">
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/feminino-padrao.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-            </div>
+        <div class="product">
+            <?php 
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class='roupa'>
+                            <img src='{$row['proImagem']}' alt='{$row['proNome']}'>
+                            <p>{$row['proNome']}</p>
+                            <p>R$ {$row['proPreco']}</p>                        
+                    </div>";
+                }
+            } else {
+                echo "<p>Nenhum produto feminino encontrado!</p>";
+            } 
+            ?>
+        </div>
     </div>
 
     <footer>

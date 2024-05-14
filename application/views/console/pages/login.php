@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar se a senha fornecida corresponde à senha criptografada no banco de dados
         if (password_verify($senha, $senha_hash)) {
             // Iniciar a sessão e armazenar o nome do usuário
-            $_SESSION['usuario'] = $row['cliNome'];
+            $_SESSION['cliente'] = $row['cliId'];
+            $_SESSION['nome'] = $row['cliNome'];
             $_SESSION['telefone'] = $row['cliTelefone'];
             $_SESSION['email'] = $row['cliEmail'];
             $_SESSION['gender'] = $row['cliGenero'];
@@ -33,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Redirecionar de volta para o login se as credenciais estiverem incorretas
             header("Location: login.php?erro=1");
+            echo("Email ou senha incorretos!");
             exit;
         }
     } else {
@@ -67,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" name="submit" value="Entrar">
             </form>
             <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p>
-            <p>Login como <a href="../../../controllers/loginadm.php">Administrador</a>
+            <p>Login como <a href="loginadm.php">Administrador</a>
         </div>
     </section>
 </body>

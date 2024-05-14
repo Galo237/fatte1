@@ -1,3 +1,15 @@
+<?php
+// Iniciar a sessão
+session_start();
+
+include '../../../controllers/connection.php';
+
+$sql = "SELECT * FROM produtos WHERE proGenero = 'M'";
+$result = $conn->query($sql);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,69 +38,23 @@
             <a href="pages/cadastro.php"><span class="profile-icon"><img src="../imagens/user1.png" alt=""></span></a>
         </div> 
     </div>
+    <h3>Catálogo Masculino</h3>
     <div class="page-inner-content">
-            <div class="product">
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-                <div class="roupa">
-                    <img src="../imagens/roupa1.jpg" alt="">
-                    <p>Camiseta Fatte</p>
-                    <p>R$140.00</p>
-                </div>
-            </div>
+        <div class="product" id="product">
+            <?php            
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class='roupa'>
+                            <img src='data:image/jpeg;base64," . base64_encode($row['proImagem']) . "' alt='{$row['proNome']}'>
+                            <p>{$row['proNome']}</p>
+                            <p>R$ {$row['proPreco']}</p>                        
+                    </div>";
+                }
+            } else {
+                echo "<p>Nenhum produto masculino encontrado!</p>";
+            } 
+            ?>
+        </div>
     </div>
 
     <footer>
@@ -117,7 +83,5 @@
             </div>
         </div>       
     </footer>
-
-    <script src="../js/script.js"></script>
 </body>
 </html>

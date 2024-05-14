@@ -2,29 +2,59 @@
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['cliente'])) {
     // Se o usuário não estiver logado, redirecionar para a página de login
     header("Location: login.php");
     exit;
 }
 
-// Verificar se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Coletar os novos dados do formulário
-    $novo_nome = $_POST['novo_nome'];
-    $novo_telefone = $_POST['novo_telefone'];
-    $novo_email = $_POST['novo_email'];
-    $novo_genero = $_POST['novo_genero'];
+// Incluir o arquivo de conexão com o banco de dados
+include '../../../controllers/connection.php';
 
-    // Atualizar as variáveis de sessão com os novos dados
-    $_SESSION['usuario'] = $novo_nome;
-    $_SESSION['email'] = $novo_email;
-    $_SESSION['telefone'] = $novo_telefone;
-    $_SESSION['gender'] = $novo_genero;
+// Recuperar o ID do cliente atualmente logado
+$idCliente = $_SESSION['cliente'];
 
-    // Redirecionar para a página de perfil após a atualização
-    header("Location: perfil.php");
+// Consultar o cliente no banco de dados
+$sql = "SELECT * FROM cliente WHERE cliId = $idCliente";
+$result = $conn->query($sql);
+
+// Verificar se a consulta foi bem-sucedida e se retornou algum resultado
+if ($result && $result->num_rows == 1) {
+    $cliente = $result->fetch_assoc();
+} else {
+    // Se não houver resultados, exibir uma mensagem de erro e redirecionar
+    echo "Erro ao carregar dados do cliente.";
     exit;
+}
+
+
+// Verificar se o formulário foi enviado
+if(isset($_POST['submit'])) {
+    // Recuperar os dados do formulário
+    $nome = $_POST['novo_nome'];
+    $genero = $_POST['novo_genero'];
+    $email = $_POST['novo_email'];
+    $telefone = $_POST['novo_telefone'];
+    $senha = $_POST['nova_senha'];
+
+    // Atualizar os dados do cliente no banco de dados
+    $sql = "UPDATE cliente SET cliNome='$nome', cliGenero='$genero', cliEmail='$email', cliTelefone='$telefone', cliSenha='$senha' WHERE cliId=$idCliente";
+    if ($conn->query($sql) === TRUE) {
+        // Atualizar as variáveis de sessão com os novos dados do cliente
+        $_SESSION['cliNome'] = $nome;
+        $_SESSION['cliGenero'] = $genero;
+        $_SESSION['cliEmail'] = $email;
+        $_SESSION['cliTelefone'] = $telefone;
+        $_SESSION['cliSenha'] = $senha;
+
+        // Se a atualização for bem-sucedida, redirecionar para a página de perfil
+        header("Location: perfil.php");
+        exit;
+    } else {
+        // Se ocorrer um erro durante a atualização, exibir uma mensagem de erro
+        echo "Erro ao atualizar perfil!";
+        exit;
+    }
 }
 ?>
 
@@ -45,35 +75,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="form">
             <form action="atualizar_perfil.php" method="POST">
+                <input type="hidden" name="cliId" value="<?php echo $idCliente; ?>">
                 <div class="input-group">
                     <div class="input-box">
                         <label for="novo_nome">Novo Nome</label>
-                        <input id="novo_nome" type="text" name="novo_nome" placeholder="Digite seu novo nome" required>
+                        <input id="novo_nome" type="text" name="novo_nome" placeholder="Digite seu novo nome" value="<?php echo $cliente['cliNome']; ?>" required>
                     </div>
 
                     <div class="input-box">
                         <label for="novo_telefone">Novo Telefone</label>
-                        <input id="novo_telefone" type="text" name="novo_telefone" placeholder="Digite seu novo telefone" required>
+                        <input id="novo_telefone" type="text" name="novo_telefone" placeholder="Digite seu novo telefone" value="<?php echo $cliente['cliTelefone']; ?>" required>
                     </div>
 
                     <div class="input-box">
                         <label for="novo_email">Novo E-mail</label>
-                        <input id="novo_email" type="email" name="novo_email" placeholder="Digite seu novo e-mail" required>
+                        <input id="novo_email" type="email" name="novo_email" placeholder="Digite seu novo e-mail" value="<?php echo $cliente['cliEmail']; ?>" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="nova_senha">Nova Senha</label>
+                        <input id="nova_senha" type="password" name="nova_senha" placeholder="Digite sua nova senha" required>
                     </div>
 
                     <div class="input-box">
                         <label for="novo_genero">Novo Gênero</label>
                         <select id="novo_genero" name="novo_genero" required>
-                            <option value="F">Feminino</option>
-                            <option value="M">Masculino</option>
-                            <option value="O">Outros</option>
-                            <option value="N">Prefiro não dizer</option>
+                            <option value="F" <?php if($cliente['cliGenero'] == 'F') echo 'selected'; ?>>Feminino</option>
+                            <option value="M" <?php if($cliente['cliGenero'] == 'M') echo 'selected'; ?>>Masculino</option>
+                            <option value="O" <?php if($cliente['cliGenero'] == 'O') echo 'selected'; ?>>Outros</option>
+                            <option value="N" <?php if($cliente['cliGenero'] == 'N') echo 'selected'; ?>>Prefiro não dizer</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="submit-button">
-                    <button type="submit">Atualizar</button>
+                    <button type="submit" name="submit">Atualizar</button>
+                    <a href="perfil.php" class="voltar">Voltar</a>
                 </div>
             </form>
         </div>

@@ -22,17 +22,17 @@ function verificarLogin() {
 }
 
 // Função para fazer login
-function fazerLogin($usuario, $senha) {
+function fazerLogin($cliId, $senha) {
     global $conn;
 
     // Consulta SQL para verificar se o usuário e a senha correspondem
-    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
+    $sql = "SELECT * FROM cliente WHERE cliId = '$cliId' AND cliSenha = '$senha'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
         // Login bem-sucedido, configurar a variável de sessão e redirecionar para a página principal
         $_SESSION['logged_in'] = true;
-        $_SESSION['usuario'] = $usuario;
+        $_SESSION['cliente'] = $cliId;
         header("Location: index.php");
         exit;
     } else {
