@@ -19,6 +19,7 @@ if(isset($_GET['logout'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatte</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -93,6 +94,22 @@ if(isset($_GET['logout'])) {
     </div>
 
     <br>
+    <br>
+    <br>
+
+    <div class="chatbot-popup" id="chatbot">
+        <div class="chatbot-header">
+            <h5 class="mb-0">Vicatinha Bot</h5>
+            <span class="close-btn" id="close-chatbot">&times;</span>
+        </div>
+        <div id="chat-window" class="chatbot-body"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="user-input" class="form-control chat-input" placeholder="Digite o número da sua dúvida">
+            <button id="send-button" class="btn btn-primary">Enviar</button>
+        </div>
+    </div>
+    <button class="btn btn-primary chatbot-toggle-button" id="open-chatbot">Chatbot</button>
+
     <br>
     <br>
 

@@ -158,6 +158,61 @@ position: relative;
 transform: rotate(0);
 }
 
+/* Chatbot */
+.chatbot-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    z-index: 1000;
+}
+
+.chatbot-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-body {
+    height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chatbot-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input {
+    width: calc(100% - 10px);
+    display: inline-block;
+}
+
+.chatbot-toggle-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.close-btn {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 /* Adicione estilos aos botões */
 .btn {
     background-color: #ffffff;
