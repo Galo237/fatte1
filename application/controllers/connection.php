@@ -2,7 +2,7 @@
 
 $servername = "localhost"; 
 $username = "root"; 
-$password = "master100"; 
+$password = ""; 
 $database = "fatte";
 
 // Conexão com o banco de dados
