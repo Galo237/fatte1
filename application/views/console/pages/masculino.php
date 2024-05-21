@@ -16,8 +16,28 @@ if(isset($_GET['logout'])) {
     exit;
 }
 
-?>
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
+    $proId = $_POST['proId'];
+    $proNome = $_POST['proNome'];
+    $proPreco = $_POST['proPreco'];
+    $proTamanho = $_POST['proTamanho'];
 
+    $cart_item = array(
+        'id' => $proId,
+        'nome' => $proNome,
+        'preco' => $proPreco,
+        'tamanho' => $proTamanho
+    );
+
+    if(!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
+
+    $_SESSION['cart'][] = $cart_item;
+    header("Location: masculino.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,54 +46,124 @@ if(isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/masculino.css">
     <title>Masculino</title>
+    <style>
+        /* Adicionar estilos para o modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        
+        function openModal(proId, proNome, proPreco, proImagem) {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('modal-proId').value = proId;
+            document.getElementById('modal-proNome').innerText = proNome;
+            document.getElementById('modal-proPreco').innerText = 'R$ ' + proPreco;
+            document.getElementById('modal-proImagem').src = 'data:image/jpeg;base64,' + proImagem;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
     <div class="header">
-            <div class="logo"><a href="../index.php">Fatte</a></div>
-            <nav id="nav">
-                    <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
-                        <span id="hamburger"></span>
-                    </button>
-                    <ul id="menu" role="menu">
-                        <li><a href="">Destaque</a></li>
-                        <li><a href="masculino.php">Masculino</a></li>
-                        <li><a href="feminino.php">Feminino</a></li>
-                        <li><a href="sobre.php">Sobre</a></li>
-                    </ul>
-            </nav>
+        <div class="logo"><a href="../index.php">Fatte</a></div>
+        <nav id="nav">
+            <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                <span id="hamburger"></span>
+            </button>
+            <ul id="menu" role="menu">
+                <li><a href="">Destaque</a></li>
+                <li><a href="masculino.php">Masculino</a></li>
+                <li><a href="feminino.php">Feminino</a></li>
+                <li><a href="sobre.php">Sobre</a></li>
+            </ul>
+        </nav>
         <div class="icons">
             <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
-            <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
+            <a href="carrinho.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
             <?php
-                    // Verificar se o usuário está logado
-                    if(isset($_SESSION['cliente'])) {
-                        $nome_usuario = $_SESSION['nome'];
-                        // Exibir o nome do usuário no lugar do ícone de usuário
-                        echo "<a href='perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
-                        echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
-                    } else {
-                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
-                        echo "<a href='perfil.php'><span class='user-icon'><img src='../imagens/user1.png' alt=''></span></a>";
-                    }
-                ?>
+            if(isset($_SESSION['cliente'])) {
+                $nome_usuario = $_SESSION['nome'];
+                echo "<a href='perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
+            } else {
+                echo "<a href='perfil.php'><span class='user-icon'><img src='../imagens/user1.png' alt=''></span></a>";
+            }
+            ?>
         </div> 
     </div>
     <h3>Catálogo Masculino</h3>
     <div class="page-inner-content">
         <div class="product" id="product">
-            <?php            
+            <?php
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
+                    $encoded_image = base64_encode($row['proImagem']);
                     echo "<div class='roupa'>
-                            <img src='data:image/jpeg;base64," . base64_encode($row['proImagem']) . "' alt='{$row['proNome']}'>
+                            <img src='data:image/jpeg;base64,$encoded_image' alt='{$row['proNome']}' onclick='openModal(\"{$row['proId']}\", \"{$row['proNome']}\", \"{$row['proPreco']}\", \"$encoded_image\")'>
                             <p>{$row['proNome']}</p>
-                            <p>R$ {$row['proPreco']}</p>                        
+                            <p>R$ {$row['proPreco']}</p>
                         </div>";
                 }
             } else {
                 echo "<p>Nenhum produto masculino encontrado!</p>";
-            } 
+            }
             ?>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modal-proImagem" src="data:image/jpeg;base64,$encoded_image" alt="Image not loading!" style="width: 100%; max-width: 300px;">
+            <h2 id="modal-proNome"></h2>
+            <p id="modal-proPreco"></p>
+            <form method="post" action="masculino.php">
+                <input type="hidden" name="proId" id="modal-proId">
+                <input type="hidden" name="proNome" id="modal-proNome-hidden">
+                <input type="hidden" name="proPreco" id="modal-proPreco-hidden">
+                <label for="proTamanho">Tamanho:</label>
+                <select name="proTamanho" id="proTamanho" required>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="G">G</option>
+                    <option value="GG">GG</option>
+                </select>
+                <button type="submit" name="add_to_cart">Adicionar ao Carrinho</button>
+            </form>
         </div>
     </div>
 
@@ -101,7 +191,7 @@ if(isset($_GET['logout'])) {
                 <a><img src="../imagens/facebook.png" alt=""></a>
                 <p>Fatte Clothing</p>
             </div>
-        </div>       
+        </div>
     </footer>
 </body>
 </html>
