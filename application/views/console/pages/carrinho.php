@@ -27,6 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['finalizar_compra'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/carrinho.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Carrinho</title>
 </head>
 <body>
@@ -57,34 +58,42 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['finalizar_compra'])) {
             ?>
         </div>
     </div>
-    <h3>Meu Carrinho</h3>
-    <div class="page-inner-content">
+    <div style="margin-top: 50px;">
+        <h3 style="text-align: center;">Meu Carrinho</h3>
+    </div>
+    <div class="container mt-5">
         <?php
-        if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-            echo "<table>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Preço</th>
-                        <th>Tamanho</th>
-                    </tr>";
-            foreach($_SESSION['cart'] as $item) {
-                echo "<tr>
-                        <td>{$item['nome']}</td>
-                        <td>R$ {$item['preco']}</td>
-                        <td>{$item['tamanho']}</td>
-                    </tr>";
+            if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                echo "<div class='table-responsive'>
+                        <table class='table table-bordered'>
+                            <thead class='thead-light'>
+                                <tr>
+                                    <th scope='col'>Produto</th>
+                                    <th scope='col'>Preço</th>
+                                    <th scope='col'>Tamanho</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                foreach($_SESSION['cart'] as $item) {
+                    echo "<tr>
+                            <td>{$item['nome']}</td>
+                            <td>R$ {$item['preco']}</td>
+                            <td>{$item['tamanho']}</td>
+                        </tr>";
+                }
+                echo "  </tbody>
+                        </table>
+                    </div>";
+                echo "<form method='post' action='carrinho.php' class='mt-3'>
+                        <button style='margin-bottom: 30px;' type='submit' name='finalizar_compra' class='btn btn-success'>Finalizar Compra</button>
+                    </form>";
+            } else {
+                echo "<p class='alert alert-info'>Seu carrinho está vazio.</p>";
             }
-            echo "</table>";
-            echo "<form method='post' action='carrinho.php'>
-                    <button type='submit' name='finalizar_compra'>Finalizar Compra</button>
-                  </form>";
-        } else {
-            echo "<p>Seu carrinho está vazio.</p>";
-        }
         ?>
     </div>
 
-    <footer>
+    <footer class="custom-footer">
         <div class="footer-left">
             <h3>CONTATO</h3>
             <p><b>Email: </b>fattecommerce@gmail.com</p>
