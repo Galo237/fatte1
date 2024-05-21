@@ -22,6 +22,145 @@ if(isset($_SESSION['cart'])) {
     <link rel="stylesheet" href="../css/obrigado.css">
     <title>Obrigado pela sua compra!</title>
 </head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+}
+
+/* Defina o estilo global do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #fff; 
+    position: sticky;
+    top: 0;
+}
+  
+.logo {
+    font-size: 40px;
+    font-weight: bold; 
+}
+  
+#nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+#nav li {
+    display: inline-block;
+    margin-right: 30px; 
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+#menu a {
+    text-decoration: none;
+    color: black;
+}
+  
+.icons span {
+    margin-left: 15px; 
+    font-size: 24px; 
+}
+
+button {
+    display: none;
+}
+
+/* Agradecimento */
+.agradecimento-content {
+    text-align: center;
+    padding: 50px;
+}
+
+.agradecimento-content h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.agradecimento-content p {
+    font-size: 1.2em;
+    color: #666;
+    margin: 20px 0;
+}
+
+.agradecimento-content a {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.agradecimento-content a:hover {
+    background-color: #555;
+}
+
+/* Footer */
+.btn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #0c0c0c;
+    color: #ffffff;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+
+}
+
+.footer-right {
+    
+}
+
+.instagram {
+    display: flex;
+}
+
+.instagram p{
+    margin-top: 5px;
+}
+
+.twitter {
+    display: flex;
+}
+
+.twitter p {
+    margin-top: 5px;
+}
+
+.facebook {
+    display: flex;
+}
+
+.facebook p {
+    margin-top: 7px;
+}
+
+</style>
+
 <body>
     <div class="header">
         <div class="logo"><a href="../index.php">Fatte</a></div>
