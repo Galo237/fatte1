@@ -45,8 +45,19 @@ body {
     color: black;
 }
 
-button {
-    display: none;
+button[type="submit"] {
+    background-color: #0c0c0c; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    border: none; /* Remover borda */
+    border-radius: 4px; /* Borda arredondada */
+    cursor: pointer; /* Cursor do mouse */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilos para o botão de adicionar ao carrinho ao passar o mouse */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Cor de fundo ao passar o mouse */
 }
   
 .icons span {
@@ -95,14 +106,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin-top: 3rem;
-}
-
-.footer-left {
-
-}
-
-.footer-right {
-    
+    bottom: 0;
 }
 
 .instagram {

@@ -82,10 +82,8 @@ CREATE TABLE `cliente` (
   `cliNome` varchar(80) DEFAULT NULL,
   `cliTelefone` varchar(25) DEFAULT NULL,
   `cliGenero` enum('M','F','O','N') DEFAULT 'M',
-  `cliDuvida` varchar(200) DEFAULT NULL,
-  `cliFeedback` int DEFAULT NULL,
   PRIMARY KEY (`cliId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,8 +92,35 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'lucas@dev.com','Master@100','Pablo','41991591003','N',NULL,NULL),(2,'rafael@dev.com','','Rafael','41991591003','M',NULL,NULL),(3,'kucha@dev.com','','Kucha','41991591003','M',NULL,NULL),(4,'rafael@gmail.com','$2y$10$RiBTQzUubib1nzJKiip7pO3IsEdXixpUl6k27K9xRZAMdp6ndNtZe','rafael','41991591003','M',NULL,NULL),(5,'carlos@gmail.com','$2y$10$Q.I3u66FaDy65MQQSUGqH.uA.0Yd/MY6tiNDF6kAOKgb4FRkwxQiK','Carlos','41991591003','M',NULL,NULL),(6,'utomo@gmail.com','$2y$10$b0m0nb0kUbO54jA6lMM3.ua32/1UScMpynKQ5BkB2qlY0f4fJWOgi','Utomo','41991591003','M',NULL,NULL);
+INSERT INTO `cliente` VALUES (1,'lucas@dev.com','Master@100','Pablo','41991591003','N'),(2,'rafael@dev.com','','Rafael','41991591003','M'),(3,'kucha@dev.com','','Kucha','41991591003','M'),(4,'rafael@gmail.com','$2y$10$RiBTQzUubib1nzJKiip7pO3IsEdXixpUl6k27K9xRZAMdp6ndNtZe','rafael','41991591003','M'),(5,'carlos@gmail.com','$2y$10$Q.I3u66FaDy65MQQSUGqH.uA.0Yd/MY6tiNDF6kAOKgb4FRkwxQiK','Carlos','41991591003','M'),(6,'utomo@gmail.com','$2y$10$b0m0nb0kUbO54jA6lMM3.ua32/1UScMpynKQ5BkB2qlY0f4fJWOgi','Utomo','41991591003','M'),(7,'rafael@dev.com','$2y$10$SZYzP6lRFWqnsvq4fdUyxeRVxTXKzLWjcSxWekAk/SEtWABN5GGM2','Rafael','41999999999','M'),(8,NULL,NULL,NULL,NULL,'M'),(9,NULL,NULL,NULL,NULL,'M'),(10,NULL,NULL,NULL,NULL,'M');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `feedback` (
+  `fedId` int NOT NULL AUTO_INCREMENT,
+  `fedCliId` int DEFAULT NULL,
+  `fedFeedback` mediumblob,
+  `fedDuvida` int DEFAULT NULL,
+  PRIMARY KEY (`fedId`),
+  KEY `fk_feedback_cliente1_idx` (`fedCliId`),
+  CONSTRAINT `fk_feedback_cliente1` FOREIGN KEY (`fedCliId`) REFERENCES `cliente` (`cliId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feedback`
+--
+
+LOCK TABLES `feedback` WRITE;
+/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -224,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-23 21:13:39
+-- Dump completed on 2024-05-26 23:13:19

@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['finalizar_compra'])) {
 </head>
 <body>
     <div class="header">
-        <div class="logo"><a href="../index.php">Fatte</a></div>
+        <div class="logo"><a style="text-decoration: none; color: black;" href="../index.php">Fatte</a></div>
         <nav id="nav">
             <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
                 <span id="hamburger"></span>

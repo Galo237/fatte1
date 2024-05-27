@@ -2,6 +2,8 @@
 // Iniciar a sessão
 session_start();
 
+include '../../controllers/connection.php';
+
 if(isset($_GET['logout'])) {
     // Encerrar a sessão
     session_unset();
@@ -10,6 +12,24 @@ if(isset($_GET['logout'])) {
     header("Location: index.php");
     exit;
 }
+
+// Operação de leitura (READ)
+$sql = "SELECT * FROM feedback";
+$result = $conn->query($sql);
+
+if(isset($_POST['feedback'])) {
+    $feedback = $_POST['feedback'];
+
+    $sql = "INSERT INTO feedback (fedFeedback) VALUES ('$feedback')";
+
+    if ($conn->query($sql) === TRUE) {
+        header("Location: index.php?success=1");
+    
+    } else {
+        showAlert("Erro ao enviar: " . $conn->error, 'danger');
+    }
+}
+
 
 ?>
 
@@ -79,18 +99,15 @@ if(isset($_GET['logout'])) {
 
     <div class="card">
         <p>
-        <a href=""><img src="imagens/masculino.jpg" alt="masculino"></a>
+        <a href="pages/masculino.php"><img src="imagens/masculino.jpg" alt="masculino"></a>
         <span>Masculino</span>
         </p>
         <p>
-        <a href=""><img src="imagens/feminino.jpg" alt="feminino"></a>
+        <a href="pages/feminino.php"><img src="imagens/feminino.jpg" alt="feminino"></a>
         <span>Feminino</span></p>
         <p>
-        <a href=""><img src="imagens/acessorios.jpg" alt="acessorios"></a>
-        <span>Acessórios</span></p>
-        <p>
-        <a href=""><img src="imagens/kits.jpg" alt="kits"></a>
-        <span>Kits</span></p>
+        <a href="pages/sobre.php"><img src="imagens/kits.jpg" alt="kits"></a>
+        <span>Sobre</span></p>
     </div>
 
     <br>
@@ -103,12 +120,21 @@ if(isset($_GET['logout'])) {
             <span class="close-btn" id="close-chatbot">&times;</span>
         </div>
         <div id="chat-window" class="chatbot-body"></div>
+        <form method="POST">
+            <div id="feedback-section" class="chatbot-body" style="display: none;">
+                <h5>Feedback de Experiência</h5>
+                <textarea name="feedback" id="feedback-text" class="form-control" rows="4" placeholder="Descreva sua experiência com o chat"></textarea>
+                <button id="send-feedback" class="btn btn-primary mt-2" name="fedFeedback">Enviar Feedback</button>
+                <button id="cancel-feedback" class="btn btn-secondary mt-2">Cancelar</button>
+            </div>
+        </form>
         <div class="chatbot-footer">
             <input type="text" id="user-input" class="form-control chat-input" placeholder="Digite o número da sua dúvida">
             <button id="send-button" class="btn btn-primary">Enviar</button>
         </div>
     </div>
-    <button class="btn btn-primary chatbot-toggle-button" id="open-chatbot">Chatbot</button>
+    <button class="btn btn-primary chatbot-toggle-button" id="open-chatbot" name="submit">Chatbot</button>
+
 
     <br>
     <br>
