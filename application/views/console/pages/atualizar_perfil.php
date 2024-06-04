@@ -1,23 +1,18 @@
 <?php
 session_start();
-
 // Verificar se o usuário está logado
 if (!isset($_SESSION['cliente'])) {
     // Se o usuário não estiver logado, redirecionar para a página de login
     header("Location: login.php");
     exit;
 }
-
 // Incluir o arquivo de conexão com o banco de dados
 include '../../../controllers/connection.php';
-
 // Recuperar o ID do cliente atualmente logado
 $idCliente = $_SESSION['cliente'];
-
 // Consultar o cliente no banco de dados
 $sql = "SELECT * FROM cliente WHERE cliId = $idCliente";
 $result = $conn->query($sql);
-
 // Verificar se a consulta foi bem-sucedida e se retornou algum resultado
 if ($result && $result->num_rows == 1) {
     $cliente = $result->fetch_assoc();
@@ -27,7 +22,6 @@ if ($result && $result->num_rows == 1) {
     exit;
 }
 
-
 // Verificar se o formulário foi enviado
 if(isset($_POST['submit'])) {
     // Recuperar os dados do formulário
@@ -35,17 +29,16 @@ if(isset($_POST['submit'])) {
     $genero = $_POST['novo_genero'];
     $email = $_POST['novo_email'];
     $telefone = $_POST['novo_telefone'];
-    $senha = $_POST['nova_senha'];
+    $senha = password_hash($_POST['nova_senha'], PASSWORD_DEFAULT);
 
     // Atualizar os dados do cliente no banco de dados
     $sql = "UPDATE cliente SET cliNome='$nome', cliGenero='$genero', cliEmail='$email', cliTelefone='$telefone', cliSenha='$senha' WHERE cliId=$idCliente";
     if ($conn->query($sql) === TRUE) {
         // Atualizar as variáveis de sessão com os novos dados do cliente
-        $_SESSION['cliNome'] = $nome;
-        $_SESSION['cliGenero'] = $genero;
-        $_SESSION['cliEmail'] = $email;
-        $_SESSION['cliTelefone'] = $telefone;
-        $_SESSION['cliSenha'] = $senha;
+        $_SESSION['nome'] = $nome;
+        $_SESSION['gender'] = $genero;
+        $_SESSION['email'] = $email;
+        $_SESSION['telefone'] = $telefone;
 
         // Se a atualização for bem-sucedida, redirecionar para a página de perfil
         header("Location: perfil.php");
@@ -57,7 +50,6 @@ if(isset($_POST['submit'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -71,7 +63,6 @@ if(isset($_POST['submit'])) {
         <!-- Cabeçalho da página -->
         <h1>Atualizar Perfil</h1>
     </header>
-
     <div class="container">
         <div class="form">
             <form action="atualizar_perfil.php" method="POST">
@@ -81,22 +72,18 @@ if(isset($_POST['submit'])) {
                         <label for="novo_nome">Novo Nome</label>
                         <input id="novo_nome" type="text" name="novo_nome" placeholder="Digite seu novo nome" value="<?php echo $cliente['cliNome']; ?>" required>
                     </div>
-
                     <div class="input-box">
                         <label for="novo_telefone">Novo Telefone</label>
                         <input id="novo_telefone" type="text" name="novo_telefone" placeholder="Digite seu novo telefone" value="<?php echo $cliente['cliTelefone']; ?>" required>
                     </div>
-
                     <div class="input-box">
                         <label for="novo_email">Novo E-mail</label>
                         <input id="novo_email" type="email" name="novo_email" placeholder="Digite seu novo e-mail" value="<?php echo $cliente['cliEmail']; ?>" required>
                     </div>
-
                     <div class="input-box">
                         <label for="nova_senha">Nova Senha</label>
                         <input id="nova_senha" type="password" name="nova_senha" placeholder="Digite sua nova senha">
                     </div>
-
                     <div class="input-box">
                         <label for="novo_genero">Novo Gênero</label>
                         <select id="novo_genero" name="novo_genero" required>
@@ -107,7 +94,6 @@ if(isset($_POST['submit'])) {
                         </select>
                     </div>
                 </div>
-
                 <div class="submit-button">
                     <button type="submit" name="submit">Atualizar</button>
                     <a href="perfil.php" class="voltar">Voltar</a>

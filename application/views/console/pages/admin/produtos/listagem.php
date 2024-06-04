@@ -13,12 +13,53 @@ if(isset($_GET['logout'])) {
 // Incluir o arquivo de conexão com o banco de dados
 include '../../../../../controllers/connection.php';
 
-// Verificar se o usuário está logado
-// verificarLogin();
-
 // Função para exibir uma mensagem de alerta
 function showAlert($message, $type = 'info') {
     echo "<div class='alert alert-$type' role='alert'>$message</div>";
+}
+
+function uploadImage($caminho){
+    if(!empty($_FILES['imagem']['name'])) {
+
+        $nomeArquivo = $_FILES['imagem']['name'];
+        $tipo = $_FILES['imagem']['type'];
+        $nomeTemporario = $_FILES['imagem']['tmp_name'];
+        $tamanho = $_FILES['imagem']['size'];
+        $erros = array();
+
+        $tamanhoMaximo = 1024 * 1024 * 5;
+        if($tamanho > $tamanhoMaximo) {
+            $erros[] = "Seu arquivo excede o tamanho máximo!<br>";
+        }
+
+        $arquivosPermitidos = ["png", "jpg", "jpeg"];
+        $extensao = pathinfo($nomeArquivo, PATHINFO_EXTENSION);
+        if(!in_array($extensao, $arquivosPermitidos)) {
+            $erros[] = "Arquivo não permitido!<br>";
+        }
+
+        $typesPermitidos = ["image/png", "image/jpg", "image/jpeg"];
+        if(!in_array($tipo, $typesPermitidos)) {
+            $erros[] = "Tipo de arquivo não permitido!<br>";              
+        }
+
+        if(!empty($erros)) {
+            foreach($erros as $erro) {
+                echo $erro;
+            }
+            return false;
+        } else {
+            $hoje = date("d-m-Y_h-i");
+            $novoNome = $hoje."-".$nomeArquivo;
+            if(move_uploaded_file($nomeTemporario, $caminho.$novoNome)) {
+                return $novoNome;
+            } else {
+                return false;
+            }
+        }
+
+    }
+    return false;
 }
 
 // Operação de leitura (READ)
@@ -33,25 +74,22 @@ if(isset($_POST['submit'])) {
     $preco = $_POST['preco'];
     $tipo = $_POST['tipo'];
     $tamanho = $_POST['tamanho'];
-    
-    // Upload de imagem
+
     $imagem = "";
-    if(isset($_FILES['proImagem']) && $_FILES['proImagem']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = "uploads/";
-        $uploadFile = $uploadDir . basename($_FILES['proImagem']['name']);
-        if (move_uploaded_file($_FILES['proImagem']['tmp_name'], $uploadFile)) {
-            $imagem = $uploadFile;
-        } else {
-            showAlert("Erro ao fazer upload da imagem", 'danger');
-        }
+    if(!empty($_FILES['imagem']['name'])) {
+        $caminho = "imagens/uploads/";
+        $imagem = uploadImage($caminho);
     }
     
-    $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho', '$imagem')";
-    if ($conn->query($sql) === TRUE) {
-        header("Location: listagem.php?success=1");
-    
+    if($imagem) {
+        $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho', '$imagem')";
+        if ($conn->query($sql) === TRUE) {
+            header("Location: listagem.php?success=1");
+        } else {
+            showAlert("Erro ao adicionar produto: " . $conn->error, 'danger');
+        }
     } else {
-        showAlert("Erro ao adicionar produto: " . $conn->error, 'danger');
+        showAlert("Erro ao fazer upload da imagem", 'danger');
     }
 }
 
@@ -59,7 +97,6 @@ if(isset($_POST['submit'])) {
 if (isset($_GET['success']) && $_GET['success'] == 1) {
     showAlert("Produto adicionado com sucesso", 'success');
 }
-
 
 // Operação de exclusão (DELETE)
 if(isset($_GET['delete'])) {
@@ -93,7 +130,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
         <a href="?logout" class="btn btn-danger">Logout</a>
     </div>
     <h2>Cadastro de Produtos</h2>
-    <form method="POST" class="mt-4">
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" required>
@@ -121,7 +158,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
         <div class="form-group">
             <label for="imagem">Imagem:</label>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imagem" name="proImagem" onchange="previewImage()">
+                <input type="file" class="custom-file-input" id="imagem" name="imagem" onchange="previewImage()">
                 <label class="custom-file-label" for="imagem">Escolher arquivo de imagem a ser adicionado!</label>
             </div>
             <img id="preview" src="#" alt="Pré-visualização da Imagem" style="display: none; max-width: 100%; max-height: 200px;">
@@ -150,7 +187,7 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
                             <td>{$row['proId']}</td>
-                            <td><img src='{$row['proImagem']}' alt='Imagem do Produto' style='max-width: 100px; max-height: 100px;'></td>
+                            <td><img src='imagens/uploads/{$row['proImagem']}' style='max-width: 50px; max-height: 50px;'></td>
                             <td>{$row['proNome']}</td>
                             <td>{$row['proGenero']}</td>
                             <td>{$row['proPreco']}</td>
@@ -189,6 +226,4 @@ function previewImage() {
         reader.readAsDataURL(fileInput);
     }
 }
-
-
 </script>

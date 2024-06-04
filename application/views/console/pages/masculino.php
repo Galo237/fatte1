@@ -114,6 +114,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
             margin-right: 0.5rem;
         }
 
+        .product {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajustando o tamanho mínimo e máximo das colunas */
+            gap: 20px; /* Espaçamento entre os produtos */
+            padding: 40px;
+        }
+
+        @media screen and (min-width: 768px) {
+            .product {
+                grid-template-columns: repeat(3, 1fr); /* Definindo três colunas em telas maiores */
+            }
+        }
+
+        .roupa {
+            text-align: center; /* Centralizar o texto */
+            height: 350px; /* Definindo uma altura fixa para o contêiner dos produtos */
+        }
+
+        .roupa img {
+            max-width: 100%; /* Assegurando que a largura da imagem não ultrapasse o contêiner */
+            max-height: 100%; /* Assegurando que a altura da imagem não ultrapasse o contêiner */
+            width: auto; /* Para garantir que a imagem mantenha a proporção */
+            height: auto; /* Para garantir que a imagem mantenha a proporção */
+        }
+
         .btn {
             background-color: #ffffff;
             color: #000000;
@@ -148,7 +173,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
             margin-bottom: 0.5rem !important;
         }
 
-
     </style>
     <script>
         function openModal(proId, proNome, proPreco, proImagem) {
@@ -156,7 +180,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
             document.getElementById('modal-proId').value = proId;
             document.getElementById('modal-proNome').innerText = proNome;
             document.getElementById('modal-proPreco').innerText = 'R$ ' + proPreco;
-            document.getElementById('modal-proImagem').src = 'data:image/jpeg;base64,' + proImagem;
+            document.getElementById('modal-proImagem').src = proImagem;
         }
 
         function closeModal() {
@@ -211,9 +235,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
             <?php
             if($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    $encoded_image = base64_encode($row['proImagem']);
+                    $imagePath = "admin/produtos/imagens/uploads/" . $row['proImagem'];
                     echo "<div class='roupa'>
-                            <img src='data:image/jpeg;base64,$encoded_image' alt='{$row['proNome']}' onclick='openModal(\"{$row['proId']}\", \"{$row['proNome']}\", \"{$row['proPreco']}\", \"$encoded_image\")'>
+                            <img src='$imagePath' alt='{$row['proNome']}' onclick='openModal(\"{$row['proId']}\", \"{$row['proNome']}\", \"{$row['proPreco']}\", \"$imagePath\")'>
+                            <br>
                             <p>{$row['proNome']}</p>
                             <p>R$ {$row['proPreco']}</p>
                         </div>";

@@ -4,12 +4,53 @@ session_start();
 // Incluir o arquivo de conexão com o banco de dados
 include '../../../../../controllers/connection.php';
 
-// Verificar se o usuário está logado
-// verificarLogin();
-
 // Função para exibir uma mensagem de alerta
 function showAlert($message, $type = 'info') {
     echo "<div class='alert alert-$type' role='alert'>$message</div>";
+}
+
+function uploadImage($caminho){
+    if(!empty($_FILES['imagem']['name'])) {
+
+        $nomeArquivo = $_FILES['imagem']['name'];
+        $tipo = $_FILES['imagem']['type'];
+        $nomeTemporario = $_FILES['imagem']['tmp_name'];
+        $tamanho = $_FILES['imagem']['size'];
+        $erros = array();
+
+        $tamanhoMaximo = 1024 * 1024 * 5;
+        if($tamanho > $tamanhoMaximo) {
+            $erros[] = "Seu arquivo excede o tamanho máximo!<br>";
+        }
+
+        $arquivosPermitidos = ["png", "jpg", "jpeg"];
+        $extensao = pathinfo($nomeArquivo, PATHINFO_EXTENSION);
+        if(!in_array($extensao, $arquivosPermitidos)) {
+            $erros[] = "Arquivo não permitido!<br>";
+        }
+
+        $typesPermitidos = ["image/png", "image/jpg", "image/jpeg"];
+        if(!in_array($tipo, $typesPermitidos)) {
+            $erros[] = "Tipo de arquivo não permitido!<br>";              
+        }
+
+        if(!empty($erros)) {
+            foreach($erros as $erro) {
+                echo $erro;
+            }
+            return false;
+        } else {
+            $hoje = date("d-m-Y_h-i");
+            $novoNome = $hoje."-".$nomeArquivo;
+            if(move_uploaded_file($nomeTemporario, $caminho.$novoNome)) {
+                return $novoNome;
+            } else {
+                return false;
+            }
+        }
+
+    }
+    return false;
 }
 
 // Recuperar o ID do produto a ser editado
@@ -45,14 +86,21 @@ if(isset($_POST['update'])) {
 
     // Upload de imagem
     $imagem = "";
-    if(isset($_FILES['proImagem']) && $_FILES['proImagem']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = "uploads/";
-        $uploadFile = $uploadDir . basename($_FILES['proImagem']['name']);
-        if (move_uploaded_file($_FILES['proImagem']['tmp_name'], $uploadFile)) {
-            $imagem = $uploadFile;
-        } else {
-            showAlert("Erro ao fazer upload da imagem", 'danger');
+    if(!empty($_FILES['imagem']['name'])) {
+        $caminho = "imagens/uploads/";
+
+        // Excluir a imagem antiga
+        if(!empty($produto['proImagem'])) {
+            $imagemAntiga = $caminho . $produto['proImagem'];
+            if (file_exists($imagemAntiga)) {
+                unlink($imagemAntiga);
+            }
         }
+
+        $imagem = uploadImage($caminho);
+    } else {
+        // Mantém a imagem existente se nenhuma nova imagem for enviada
+        $imagem = $produto['proImagem'];
     }
 
     $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proTamanho='$tamanho', proImagem='$imagem' WHERE proId=$id";
@@ -62,7 +110,6 @@ if(isset($_POST['update'])) {
         showAlert("Erro ao atualizar produto: " . $conn->error, 'danger');
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +119,23 @@ if(isset($_POST['update'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Editar Produto</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .image-preview-container {
+        position: relative;
+        max-width: 200px;
+        max-height: 200px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .image-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+    }
+</style>
 </head>
 <body>
 
@@ -107,13 +171,19 @@ if(isset($_POST['update'])) {
         <div class="form-group">
             <label for="imagem">Imagem:</label>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imagem" name="proImagem" onchange="previewImage()">
+                <input type="file" class="custom-file-input" id="imagem" name="imagem" onchange="previewImage()">
                 <label class="custom-file-label" for="imagem">Escolher arquivo de imagem a ser adicionado!</label>
             </div>
-            <img id="preview" src="#" alt="Pré-visualização da Imagem" style="display: none; max-width: 100%; max-height: 200px;">
+            <div class="image-preview-container">
+                <?php if (!empty($produto['proImagem'])): ?>
+                    <img id="preview" src="imagens/uploads/<?php echo $produto['proImagem']; ?>" alt="Pré-visualização da Imagem" class="image-preview" style="display: block;">
+                <?php else: ?>
+                    <img id="preview" src="#" alt="Pré-visualização da Imagem" class="image-preview">
+                <?php endif; ?>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary" name="update">Atualizar Produto</button>
-        <a href="listagem.php" class="btn btn-primary" name="back">Voltar</a>
+        <a href="listagem.php" class="btn btn-secondary" name="back">Voltar</a>
     </form>
 </div>
 
