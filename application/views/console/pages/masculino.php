@@ -181,6 +181,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
             document.getElementById('modal-proNome').innerText = proNome;
             document.getElementById('modal-proPreco').innerText = 'R$ ' + proPreco;
             document.getElementById('modal-proImagem').src = proImagem;
+
+            document.getElementById('modal-proNome-hidden').value = proNome;
+            document.getElementById('modal-proPreco-hidden').value = proPreco;
         }
 
         function closeModal() {
@@ -261,6 +264,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
                 <input type="hidden" name="proId" id="modal-proId">
                 <input type="hidden" name="proNome" id="modal-proNome-hidden">
                 <input type="hidden" name="proPreco" id="modal-proPreco-hidden">
+                <input type="hidden" name="proImagem" id="modal-proImagem-hidden">
                 <label for="proTamanho">Tamanho:</label>
                 <select name="proTamanho" id="proTamanho" required>
                     <option value="P">P</option>
