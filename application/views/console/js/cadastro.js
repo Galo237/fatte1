@@ -1,35 +1,47 @@
-const senhaInput = document.getElementById('password');
-const confirmarSenhaInput = document.getElementById('confirmPassword');
-const mensagem = document.getElementById('message');
-const confirmMensagem = document.getElementById('message-confirm');
-const continueButton = document.getElementById('continue-button');
+const form = document.getElementById("formulario");
+const campos = document.querySelectorAll(".required");
+const spans = document.querySelectorAll(".span-required");
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+const senhaRegex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[$&@#])[0-9a-zA-Z$&@#]{8,}$/;
 
-function confereSenha() {
-    const senha = senhaInput.value;
-    const confirmarSenha = confirmarSenhaInput.value;
-    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+function setError(index) {
+    campos[index].style.border = '2px solid #e63636';
+    spans[index].style.display = 'block';
+}
 
-    if (senha.match(regex)) {
-        mensagem.innerHTML = "";
-        mensagem.style.display = "none";
-        if (senha === confirmarSenha) {
-            confirmMensagem.innerHTML = "";
-            confirmMensagem.style.display = "none"; // Oculta a mensagem de erro
-        } else {
-            confirmMensagem.innerHTML = "As senhas não correspondem.";
-            confirmMensagem.style.display = "block"; // Exibe a mensagem de erro
-            confirmMensagem.style.fontSize = "10px"; // Tamanho da fonte
-            confirmMensagem.style.color = "red"; // Cor do texto
-        }
+function removeError(index) {
+    campos[index].style.border = '';
+    spans[index].style.display = 'none';
+}
+
+function emailValidate() {
+    if (!emailRegex.test(campos[0].value)) {
+        setError(0);
     } else {
-        mensagem.innerHTML = "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial.";
-        mensagem.style.display = "block"; // Exibe a mensagem de erro
-        mensagem.style.fontSize = "10px"; // Tamanho da fonte
-        mensagem.style.color = "red"; // Cor do texto
-        mensagem.style.width="250px";
+        removeError(0);
     }
 }
 
-senhaInput.addEventListener('input', confereSenha);
-confirmarSenhaInput.addEventListener('input');
-confereSenha();
+function confirmEmailValidate() {
+    if (campos[0].value !== campos[1].value) {
+        setError(1);
+    } else {
+        removeError(1);
+    }
+}
+
+function mainPasswordValidate() {
+    if (campos[2].value.length < 8) {
+        setError(2);
+    } else {
+        removeError(2);
+    }
+}
+
+function confirmPasswordValidate() {
+    if (campos[2].value !== campos[3].value) {
+        setError(3);
+    } else {
+        removeError(3);
+    }
+}

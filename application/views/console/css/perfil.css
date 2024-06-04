@@ -14,11 +14,9 @@ body {
     top: 0;
 }
   
-.logo a{
+.logo {
     font-size: 40px;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
+    font-weight: bold; 
 }
   
 #nav ul {

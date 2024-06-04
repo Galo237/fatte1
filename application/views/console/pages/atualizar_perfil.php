@@ -27,7 +27,6 @@ if ($result && $result->num_rows == 1) {
     exit;
 }
 
-
 // Verificar se o formulário foi enviado
 if(isset($_POST['submit'])) {
     // Recuperar os dados do formulário
@@ -35,17 +34,16 @@ if(isset($_POST['submit'])) {
     $genero = $_POST['novo_genero'];
     $email = $_POST['novo_email'];
     $telefone = $_POST['novo_telefone'];
-    $senha = $_POST['nova_senha'];
+    $senha = password_hash($_POST['nova_senha'], PASSWORD_DEFAULT);
 
     // Atualizar os dados do cliente no banco de dados
     $sql = "UPDATE cliente SET cliNome='$nome', cliGenero='$genero', cliEmail='$email', cliTelefone='$telefone', cliSenha='$senha' WHERE cliId=$idCliente";
     if ($conn->query($sql) === TRUE) {
         // Atualizar as variáveis de sessão com os novos dados do cliente
-        $_SESSION['cliNome'] = $nome;
-        $_SESSION['cliGenero'] = $genero;
-        $_SESSION['cliEmail'] = $email;
-        $_SESSION['cliTelefone'] = $telefone;
-        $_SESSION['cliSenha'] = $senha;
+        $_SESSION['nome'] = $nome;
+        $_SESSION['gender'] = $genero;
+        $_SESSION['email'] = $email;
+        $_SESSION['telefone'] = $telefone;
 
         // Se a atualização for bem-sucedida, redirecionar para a página de perfil
         header("Location: perfil.php");

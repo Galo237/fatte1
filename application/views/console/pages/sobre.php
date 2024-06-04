@@ -18,49 +18,56 @@ if(isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatte</title>
+    <title>Sobre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/sobre.css">
 </head>
 <body>
 <header>
-        <div class="header">
-                <div class="logo"><a href="../index.php">Fatte</a></div>
-                <nav id="nav">
-                        <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
-                            <span id="hamburger"></span>
-                        </button>
-                        <ul id="menu" role="menu">
-                            <li><a href="">Destaque</a></li>
-                            <li><a href="masculino.php">Masculino</a></li>
-                            <li><a href="feminino.php">Feminino</a></li>
-                            <li><a href="sobre.php">Sobre</a></li>
-                        </ul>
-                </nav>
-            <div class="icons">
-                <span class="search-icon"><img src="../imagens/search.png" alt=""></span>
-                <span class="cart-icon"><img src="../imagens/cart.png" alt=""></span>
-                <?php
-                    // Verificar se o usuário está logado
-                    if(isset($_SESSION['cliente'])) {
-                        $nome_usuario = $_SESSION['nome'];
-                        // Exibir o nome do usuário no lugar do ícone de usuário
-                        echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
-                        echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
-                    } else {
-                        // Se o usuário não estiver logado, exibir o ícone de usuário padrão
-                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";
-                    }
-                ?>
-            </div> 
-        </div> 
+    <div class="header container-fluid d-flex justify-content-between align-items-center py-3">
+        <div class="logo"><a href="../index.php">Fatte</a></div>
+        <nav class="d-none d-md-block">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" style="color: black; font-weight: bold;" href="#">Destaque</a></li>
+                <li class="nav-item"><a class="nav-link" style="color: black; font-weight: bold;" href="masculino.php">Masculino</a></li>
+                <li class="nav-item"><a class="nav-link" style="color: black; font-weight: bold;" href="feminino.php">Feminino</a></li>
+                <li class="nav-item"><a class="nav-link" style="color: black; font-weight: bold;" href="sobre.php">Sobre</a></li>
+            </ul>
+        </nav>
+        <button class="btn btn-link d-md-none" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+            <span id="hamburger"></span> Menu
+        </button>
+        <div class="icons d-flex align-items-center">
+            <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
+            <a href="carrinho.php"><span class="cart-icon ml-3"><img src="../imagens/cart1.png" alt=""></span></a>
+            <?php
+            if(isset($_SESSION['cliente'])) {
+                $nome_usuario = $_SESSION['nome'];
+                echo "<a href='perfil.php' class='ml-3' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                echo "<a href='?logout' class='ml-3'><img src='../imagens/logout.png' alt=''></a>";
+            } else {
+                echo "<a href='pages/perfil.php' class='ml-3'><span class='user-icon'><img src='../imagens/user1.png' alt=''></span></a>";
+            }
+            ?>
+        </div>
+    </div>
+    <nav id="nav" class="d-md-none">
+        <ul id="menu" class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#">Destaque</a></li>
+            <li class="nav-item"><a class="nav-link" href="masculino.php">Masculino</a></li>
+            <li class="nav-item"><a class="nav-link" href="feminino.php">Feminino</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre</a></li>
+        </ul>
+    </nav>
 </header>
 
-    <div class="sobre">
-        <span class="imgsobre"><img src="../imagens/sobre.jpg" alt=""></span>
-        <br>
-        <hr>
-        <h1>Sobre nós</h1>
-        <p>No coração de uma cidade agitada, onde os sons das ruas se misturam com a energia pulsante da vida urbana, nasceu uma ideia que iria mudar o mundo da moda para sempre. Em um pequeno estúdio, um grupo de visionários se reuniu com um propósito: criar uma marca que não apenas vestisse corpos, mas também contasse histórias. Assim nasceu "Fatte".
+<div class="sobre container my-5">
+    <div class="text-center mb-5">
+        <img class="img-fluid" src="../imagens/sobre.jpg" alt="">
+    </div>
+    <hr>
+    <h1 class="text-center">Sobre nós</h1>
+    <p>No coração de uma cidade agitada, onde os sons das ruas se misturam com a energia pulsante da vida urbana, nasceu uma ideia que iria mudar o mundo da moda para sempre. Em um pequeno estúdio, um grupo de visionários se reuniu com um propósito: criar uma marca que não apenas vestisse corpos, mas também contasse histórias. Assim nasceu "Fatte".
 
 O nome "Fatte" é uma homenagem à ousadia e à coragem. Derivado da palavra italiana "Fatto", que significa "feito", a marca se compromete a criar peças que são mais do que simples roupas; são manifestações de estilo, individualidade e autoexpressão. <br><br>
 
@@ -73,34 +80,30 @@ Mas nossa dedicação vai além de simplesmente criar roupas. A "Fatte" está co
 À medida que continuamos a crescer e evoluir, mantemos firmemente nossos valores fundamentais. Na "Fatte", acreditamos que todos têm o direito de se expressar livremente, sem medo de julgamento ou restrição. Somos uma comunidade diversificada de indivíduos apaixonados, unidos pela nossa paixão pela moda e pelo desejo de fazer a diferença no mundo.
 
 Junte-se a nós em nossa jornada enquanto continuamos a redefinir os limites da moda e inspirar uma nova geração de criatividade e autoexpressão. Esta é a história da "Fatte" - uma marca que não apenas veste corpos, mas também alimenta almas. Seja ousado. Seja autêntico. Seja "Fatte".</p>
+</div>
 
-
-    
-    </div>
-
-    <br>
-    <br>
-
-
-
-<footer>
-        <div class="footer-left">
+<footer class="footer bg-darker text-white py-4">
+    <div class="container d-flex justify-content-between">
+        <div>
             <h3>CONTATO</h3>
             <p><b>Email: </b>fattecommerce@gmail.com</p>
             <p><b>Telefone: </b>+55 41 99842-8507</p>
-            <br>
             <p>Segunda à sexta: 09:00 às 18:00</p>
             <p>Sábado: 09:00 às 15:00</p>
             <p>Exceto Feriados</p>
         </div>
-        <div class="footer-right">
+        <div>
             <h3>REDES SOCIAIS</h3>
-            <a class="instagram"></a><img src="imagens/instagram.png" alt=""><p>@fatteclothing</p>
-            <a class="twitter"><img src="imagens/twitter.png" alt=""></a><p>@fatteclothing</p>
-            <a class="facebook"><img src="imagens/facebook.png" alt=""></a><p>Fatte Clothing</p>
+            <a class="d-block" style="text-decoration: none; color: white;" href="#"><img src="../imagens/instagram.png" alt=""> @fatteclothing</a>
+            <a class="d-block" style="text-decoration: none; color: white;" href="#"><img src="../imagens/twitter.png" alt=""> @fatteclothing</a>
+            <a class="d-block" style="text-decoration: none; color: white;" href="#"><img src="../imagens/facebook.png" alt=""> Fatte Clothing</a>
         </div>
+    </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 </body>
 </html>

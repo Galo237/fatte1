@@ -126,10 +126,10 @@ body {
     color: #000000be;
 }
 
-#message {
-    font-size: 10px;
+.span-required {
+    display: none;
+    font-size: 8px;
     color: red;
-    display: block;
 }
 
 .gender-group {

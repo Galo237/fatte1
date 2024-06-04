@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img src="../imagens/banner2.png" alt="">
         </div>
         <div class="form">
-            <form action="cadastro.php" method="POST">
+            <form id="formulario" action="cadastro.php" method="POST">
                 <div class="form-header">
                     <div class="title">
                         <h1>Cadastre-se</h1>
@@ -75,25 +75,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="input-box">
                         <label for="email">E-mail</label>
-                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                        <input class="inputs required" id="email" type="email" name="email" placeholder="Digite seu e-mail" oninput="emailValidate()" required>
+                        <span style="display: none; font-size: 12px; color: red;" class="span-required">Digite um email válido</span>
                     </div>
 
                     <div class="input-box">
                         <label for="confirmEmail">Confirme seu email</label>
-                        <input id="confirmEmail" type="email" name="confirmEmail" placeholder="Confirme seu email" required>
+                        <input class="inputs required" id="confirmEmail" type="email" name="confirmEmail" placeholder="Confirme seu email" oninput="confirmEmailValidate()" required>
+                        <span style="display: none; font-size: 12px; color: red;" class="span-required">Emails devem ser compatíveis</span>
                     </div>
 
                     <div class="input-box">
                         <label for="password">Senha</label>
-                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
-                        <span id="message"></span>
+                        <input class="inputs required" id="password" type="password" name="password" placeholder="Digite sua senha" oninput="mainPasswordValidate()" required>
+                        <span style="display: none; font-size: 12px; color: red;" class="span-required">Sua senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caracter especial</span>
                     </div>
 
 
                     <div class="input-box">
                         <label for="confirmPassword">Confirme sua Senha</label>
-                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
-                        <span id="message-confirm"></span>
+                        <input class="inputs required" id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" oninput="confirmPasswordValidate()" required>
+                        <span style="display: none; font-size: 12px; color: red;" class="span-required">Senhas devem ser compatíveis</span>
                     </div>
 
                 </div>

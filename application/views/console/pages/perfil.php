@@ -34,11 +34,12 @@ if(isset($_SESSION['cliente'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seu Perfil</title>
     <link rel="stylesheet" href="../css/perfil.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+<header>
         <div class="header">
-            <div class="logo"><a href="../index.php">Fatte</a></div>
+            <div style="font-size: 40px; font-weight: bold;" class="logo"><a style="text-decoration: none; color: black;" href="../index.php">Fatte</a></div>
                 <nav id="nav">
                     <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
                         <span id="hamburger"></span>
@@ -52,17 +53,17 @@ if(isset($_SESSION['cliente'])) {
                 </nav>
             <div class="icons">
                 <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
-                <a href="../controllers/dashboard.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
+                <a href="carrinho.php"><span class="cart-icon"><img src="../imagens/cart1.png" alt=""></span></a>
                 <?php
                     // Verificar se o usuário está logado
                     if(isset($_SESSION['cliente'])) {
                         $nome_usuario = $_SESSION['nome'];
                         // Exibir o nome do usuário no lugar do ícone de usuário
-                        echo "<a href='pages/perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
+                        echo "<a href='perfil.php' style='text-decoration: none; color: black;'><span class='user-icon'>$nome_usuario</span></a>";
                         echo "<a href='?logout' class='logout'><img src='../imagens/logout.png' alt=''></a>";
                     } else {
                         // Se o usuário não estiver logado, exibir o ícone de usuário padrão
-                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='imagens/user1.png' alt=''></span></a>";
+                        echo "<a href='pages/perfil.php'><span class='user-icon'><img src='../imagens/user1.png' alt=''></span></a>";
                     }
                 ?>
             </div> 
