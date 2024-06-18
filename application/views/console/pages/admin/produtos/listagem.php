@@ -71,9 +71,8 @@ if(isset($_POST['submit'])) {
     $nome = $_POST['nome'];
     $genero = $_POST['genero'];
     $descricao = $_POST['descricao'];
-    $preco = $_POST['preco'];
+    $preco = str_replace(',', '.', $_POST['preco']);
     $tipo = $_POST['tipo'];
-    $tamanho = $_POST['tamanho'];
 
     $imagem = "";
     if(!empty($_FILES['imagem']['name'])) {
@@ -82,7 +81,7 @@ if(isset($_POST['submit'])) {
     }
     
     if($imagem) {
-        $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proTamanho, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$tamanho', '$imagem')";
+        $sql = "INSERT INTO produtos (proNome, proGenero, proDescricao, proPreco, proTipo, proImagem) VALUES ('$nome', '$genero', '$descricao', '$preco', '$tipo', '$imagem')";
         if ($conn->query($sql) === TRUE) {
             header("Location: listagem.php?success=1");
         } else {
@@ -133,15 +132,20 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
     <form method="POST" enctype="multipart/form-data" class="mt-4">
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" name="nome" required>
+            <input type="text" class="form-control" id="nome" name="nome" maxlength="100" required>
         </div>
         <div class="form-group">
             <label for="genero">Gênero:</label>
-            <input type="text" class="form-control" id="genero" name="genero" required>
+            <select class="form-control" id="genero" name="genero" required>
+                <option value="">Selecione uma opção:</option>
+                <option value="F">Feminino</option>
+                <option value="M">Masculino</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="preco">Preço:</label>
-            <input type="number" class="form-control" id="preco" name="preco" required>
+            <input type="number" class="form-control" id="preco" name="preco" pattern="^\d+(\,\d{1,2})?$" required>
+            <small class="form-text text-muted">Digite o preço (0,00)</small>
         </div>
         <div class="form-group">
             <label for="descricao">Descrição:</label>
@@ -149,11 +153,13 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
         </div>
         <div class="form-group">
             <label for="tipo">Tipo:</label>
-            <input type="text" class="form-control" id="tipo" name="tipo" required>
-        </div>
-        <div class="form-group">
-            <label for="tamanho">Tamanho:</label>
-            <input type="text" class="form-control" id="tamanho" name="tamanho" required>
+            <select class="form-control" id="tipo" name="tipo" required>
+                <option value="">Selecione uma opção:</option>
+                <option value="moletom">Moletom</option>
+                <option value="camisa">Camisa</option>
+                <option value="calca">Calça</option>
+                <option value="bermuda">Bermuda</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="imagem">Imagem:</label>
@@ -177,7 +183,6 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                 <th>Preço</th>
                 <th>Descrição</th>
                 <th>Tipo</th>
-                <th>Tamanho</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -193,7 +198,6 @@ if (isset($_GET['success']) && $_GET['success'] == 2) {
                             <td>{$row['proPreco']}</td>
                             <td>{$row['proDescricao']}</td>
                             <td>{$row['proTipo']}</td>
-                            <td>{$row['proTamanho']}</td>
                             <td>
                                 <a href='formulario.php?id={$row['proId']}' class='btn btn-sm btn-primary'>Editar</a>
                                 <a href='?delete={$row['proId']}' class='btn btn-sm btn-danger'>Excluir</a>

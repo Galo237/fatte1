@@ -58,7 +58,6 @@ if(isset($_POST['feedback'])) {
                     </ul>
                 </nav>
             <div class="icons">
-                <span class="search-icon"><img src="imagens/search1.png" alt=""></span>
                 <a href="pages/carrinho.php"><span class="cart-icon"><img src="imagens/cart1.png" alt=""></span></a>
                 <?php
                     // Verificar se o usuário está logado

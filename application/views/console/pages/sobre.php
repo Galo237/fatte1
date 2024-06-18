@@ -35,7 +35,6 @@ if(isset($_GET['logout'])) {
             <span id="hamburger"></span> Menu
         </button>
         <div class="icons d-flex align-items-center">
-            <span class="search-icon"><img src="../imagens/search1.png" alt=""></span>
             <a href="carrinho.php"><span class="cart-icon ml-3"><img src="../imagens/cart1.png" alt=""></span></a>
             <?php
             if(isset($_SESSION['cliente'])) {
@@ -63,7 +62,8 @@ if(isset($_GET['logout'])) {
         <img class="img-fluid" src="../imagens/sobre.jpg" alt="">
     </div>
     <hr>
-    <h1 class="text-center">Sobre nós</h1>
+    <h1 class="text-center col-md-9">Sobre nós</h1>
+    <br>
     <p>No coração de uma cidade agitada, onde os sons das ruas se misturam com a energia pulsante da vida urbana, nasceu uma ideia que iria mudar o mundo da moda para sempre. Em um pequeno estúdio, um grupo de visionários se reuniu com um propósito: criar uma marca que não apenas vestisse corpos, mas também contasse histórias. Assim nasceu "Fatte".
 
 O nome "Fatte" é uma homenagem à ousadia e à coragem. Derivado da palavra italiana "Fatto", que significa "feito", a marca se compromete a criar peças que são mais do que simples roupas; são manifestações de estilo, individualidade e autoexpressão. <br><br>

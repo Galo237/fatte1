@@ -82,7 +82,6 @@ if(isset($_POST['update'])) {
     $preco = $_POST['proPreco'];
     $descricao = $_POST['proDescricao'];
     $tipo = $_POST['proTipo'];
-    $tamanho = $_POST['proTamanho'];
 
     // Upload de imagem
     $imagem = "";
@@ -103,7 +102,7 @@ if(isset($_POST['update'])) {
         $imagem = $produto['proImagem'];
     }
 
-    $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proTamanho='$tamanho', proImagem='$imagem' WHERE proId=$id";
+    $sql = "UPDATE produtos SET proNome='$nome', proGenero='$genero', proPreco='$preco', proDescricao='$descricao', proTipo='$tipo', proImagem='$imagem' WHERE proId=$id";
     if ($conn->query($sql) === TRUE) {
         showAlert("Produto atualizado com sucesso", 'success');
     } else {
@@ -147,14 +146,18 @@ if(isset($_POST['update'])) {
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" name="proNome" value="<?php echo $produto['proNome']; ?>" required>
         </div>
-    
         <div class="form-group">
             <label for="genero">Gênero:</label>
-            <input type="text" class="form-control" id="genero" name="proGenero" value="<?php echo $produto['proGenero']; ?>" required>
+            <select class="form-control" id="genero" name="proGenero" required>
+                <option value="">Selecione</option>
+                <option value="F" <?php echo ($produto['proGenero'] == 'F') ? 'selected' : ''; ?>>Feminino</option>
+                <option value="M" <?php echo ($produto['proGenero'] == 'M') ? 'selected' : ''; ?>>Masculino</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="preco">Preço:</label>
-            <input type="number" class="form-control" id="preco" name="proPreco" value="<?php echo $produto['proPreco']; ?>" required>
+            <input type="text" class="form-control" id="preco" name="proPreco" value="<?php echo number_format($produto['proPreco'], 2, ',', '.'); ?>" required>
+            <small class="form-text text-muted">Digite o preço no formato 0,00</small>
         </div>
         <div class="form-group">
             <label for="descricao">Descrição:</label>
@@ -162,11 +165,13 @@ if(isset($_POST['update'])) {
         </div>
         <div class="form-group">
             <label for="tipo">Tipo:</label>
-            <input type="text" class="form-control" id="tipo" name="proTipo" value="<?php echo $produto['proTipo']; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="tamanho">Tamanho:</label>
-            <input type="text" class="form-control" id="tamanho" name="proTamanho" value="<?php echo $produto['proTamanho']; ?>" required>
+            <select class="form-control" id="tipo" name="proTipo" required>
+                <option value="">Selecione</option>
+                <option value="moletom" <?php echo ($produto['proTipo'] == 'moletom') ? 'selected' : ''; ?>>Moletom</option>
+                <option value="camisa" <?php echo ($produto['proTipo'] == 'camisa') ? 'selected' : ''; ?>>Camisa</option>
+                <option value="calca" <?php echo ($produto['proTipo'] == 'calca') ? 'selected' : ''; ?>>Calça</option>
+                <option value="bermuda" <?php echo ($produto['proTipo'] == 'bermuda') ? 'selected' : ''; ?>>Bermuda</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="imagem">Imagem:</label>
@@ -178,7 +183,7 @@ if(isset($_POST['update'])) {
                 <?php if (!empty($produto['proImagem'])): ?>
                     <img id="preview" src="imagens/uploads/<?php echo $produto['proImagem']; ?>" alt="Pré-visualização da Imagem" class="image-preview" style="display: block;">
                 <?php else: ?>
-                    <img id="preview" src="#" alt="Pré-visualização da Imagem" class="image-preview">
+                    <img id="preview" src="#" alt="Pré-visualização da Imagem" class="image-preview" style="display: none;">
                 <?php endif; ?>
             </div>
         </div>
